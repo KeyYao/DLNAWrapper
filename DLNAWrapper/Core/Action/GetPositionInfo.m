@@ -45,15 +45,11 @@
 
 - (NSData *)postData
 {
-    DDXMLElement *getPositionInfoElement = [[DDXMLElement alloc] initWithName:@"u:GetPositionInfo"];
+    GDataXMLElement *getPositionInfoElement = [GDataXMLElement elementWithName:@"u:GetPositionInfo"];
     
-    NSMutableArray<DDXMLNode *> *getPositionInfoAttr = [[NSMutableArray alloc] init];
+    [getPositionInfoElement addAttribute:[GDataXMLNode attributeWithName:@"xmlns:u" stringValue:SERVICE_TYPE_AVTRANSPORT]];
     
-    [getPositionInfoAttr addObject:[DDXMLNode attributeWithName:@"xmlns:u" stringValue:SERVICE_TYPE_AVTRANSPORT]];
-    
-    getPositionInfoElement.attributes = getPositionInfoAttr;
-    
-    DDXMLElement *instanceIDElement = [[DDXMLElement alloc] initWithName:@"InstanceID" stringValue:@"0"];
+    GDataXMLElement *instanceIDElement = [GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"];
     
     [getPositionInfoElement addChild:instanceIDElement];
     
@@ -62,15 +58,16 @@
 
 - (void)success:(NSData *)data
 {
-    DDXMLDocument *document = [[DDXMLDocument alloc] initWithData:data options:0 error:nil];
     
-    DDXMLElement *bodyElement = [[document rootElement] elementForName:@"Body" xmlns:[[document rootElement] xmlns]];
+    GDataXMLDocument *document = [[GDataXMLDocument alloc] initWithData:data options:0 error:nil];
     
-    DDXMLElement *getPositionInfoResponseElement = [bodyElement elementForName:@"GetPositionInfoResponse" xmlns:SERVICE_TYPE_AVTRANSPORT];
+    GDataXMLElement *bodyElement = [[[document rootElement] elementsForLocalName:@"Body" URI:[[document rootElement] URI]] objectAtIndex:0];
     
-    NSString *totalDuration = [[getPositionInfoResponseElement elementForName:@"TrackDuration"] stringValue];
+    GDataXMLElement *getPositionInfoResponseElement = [[bodyElement elementsForLocalName:@"GetPositionInfoResponse" URI:SERVICE_TYPE_AVTRANSPORT] objectAtIndex:0];
     
-    NSString *currentDuration = [[getPositionInfoResponseElement elementForName:@"RelTime"] stringValue];
+    NSString *totalDuration = [[[getPositionInfoResponseElement elementsForName:@"TrackDuration"] objectAtIndex:0] stringValue];
+    
+    NSString *currentDuration = [[[getPositionInfoResponseElement elementsForName:@"RelTime"] objectAtIndex:0] stringValue];
     
     successCallback(currentDuration, totalDuration);
 }

@@ -45,17 +45,13 @@
 
 - (NSData *)postData
 {
-    DDXMLElement *getVolumeElement = [[DDXMLElement alloc] initWithName:@"u:GetVolume"];
+    GDataXMLElement *getVolumeElement = [GDataXMLElement elementWithName:@"u:GetVolume"];
     
-    NSMutableArray<DDXMLNode *> *getVolumeAttr = [[NSMutableArray alloc] init];
+    [getVolumeElement addAttribute:[GDataXMLNode attributeWithName:@"xmlns:u" stringValue:SERVICE_TYPE_RENDERING_CONTROL]];
     
-    [getVolumeAttr addObject:[DDXMLNode attributeWithName:@"xmlns:u" stringValue:SERVICE_TYPE_RENDERING_CONTROL]];
+    GDataXMLElement *instanceIDElement = [GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"];
     
-    getVolumeElement.attributes = getVolumeAttr;
-    
-    DDXMLElement *instanceIDElement = [[DDXMLElement alloc] initWithName:@"InstanceID" stringValue:@"0"];
-    
-    DDXMLElement *channelElement = [[DDXMLElement alloc] initWithName:@"Channel" stringValue:@"Master"];
+    GDataXMLElement *channelElement = [GDataXMLElement elementWithName:@"Channel" stringValue:@"Master"];
     
     [getVolumeElement addChild:instanceIDElement];
     
@@ -66,13 +62,13 @@
 
 - (void)success:(NSData *)data
 {
-    DDXMLDocument *document = [[DDXMLDocument alloc] initWithData:data options:0 error:nil];
+    GDataXMLDocument *document = [[GDataXMLDocument alloc] initWithData:data options:0 error:nil];
     
-    DDXMLElement *bodyElement = [[document rootElement] elementForName:@"Body" xmlns:[[document rootElement] xmlns]];
+    GDataXMLElement *bodyElement = [[[document rootElement] elementsForLocalName:@"Body" URI:[[document rootElement] URI]] objectAtIndex:0];
     
-    DDXMLElement *getVolumeResponseElement = [bodyElement elementForName:@"u:GetVolumeResponse" xmlns:SERVICE_TYPE_RENDERING_CONTROL];
+    GDataXMLElement *getVolumeResponseElement = [[bodyElement elementsForLocalName:@"GetVolumeResponse" URI:SERVICE_TYPE_RENDERING_CONTROL] objectAtIndex:0];
     
-    NSInteger currentVolume = [[[getVolumeResponseElement elementForName:@"CurrentVolume"] stringValue] integerValue];
+    NSInteger currentVolume = [[[[getVolumeResponseElement elementsForName:@"CurrentVolume"] objectAtIndex:0] stringValue] integerValue];
     
     successCallback(currentVolume);
 }

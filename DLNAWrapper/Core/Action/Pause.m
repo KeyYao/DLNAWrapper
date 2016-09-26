@@ -45,21 +45,13 @@
 
 - (NSData *)postData
 {
-    DDXMLElement *pauseElement = [[DDXMLElement alloc] initWithName:@"u:Pause"];
+    GDataXMLElement *pauseElement = [GDataXMLElement elementWithName:@"u:Pause"];
     
-    NSMutableArray<DDXMLNode *> *pauseAttr = [[NSMutableArray alloc] init];
+    [pauseElement addAttribute:[GDataXMLNode attributeWithName:@"xmlns:u" stringValue:SERVICE_TYPE_AVTRANSPORT]];
     
-    [pauseAttr addObject:[DDXMLNode attributeWithName:@"xmlns:u" stringValue:SERVICE_TYPE_AVTRANSPORT]];
-    
-    pauseElement.attributes = pauseAttr;
-    
-    DDXMLElement *instanceIDElement = [[DDXMLElement alloc] initWithName:@"InstanceID" stringValue:@"0"];
-    
-//    DDXMLElement *speedElement = [[DDXMLElement alloc] initWithName:@"Speed" stringValue:@"1"];
+    GDataXMLElement *instanceIDElement = [GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"];
     
     [pauseElement addChild:instanceIDElement];
-    
-//    [pauseElement addChild:speedElement];
     
     return [self dataXML:pauseElement];
 }

@@ -45,17 +45,13 @@
 
 - (NSData *)postData
 {
-    DDXMLElement *playElement = [[DDXMLElement alloc] initWithName:@"u:Play"];
+    GDataXMLElement *playElement = [GDataXMLElement elementWithName:@"u:Play"];
     
-    NSMutableArray<DDXMLNode *> *playAttr = [[NSMutableArray alloc] init];
+    [playElement addAttribute:[GDataXMLNode attributeWithName:@"xmlns:u" stringValue:SERVICE_TYPE_AVTRANSPORT]];
     
-    [playAttr addObject:[DDXMLNode attributeWithName:@"xmlns:u" stringValue:SERVICE_TYPE_AVTRANSPORT]];
+    GDataXMLElement *instanceIDElement = [GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"];
     
-    playElement.attributes = playAttr;
-    
-    DDXMLElement *instanceIDElement = [[DDXMLElement alloc] initWithName:@"InstanceID" stringValue:@"0"];
-    
-    DDXMLElement *speedElement = [[DDXMLElement alloc] initWithName:@"Speed" stringValue:@"1"];
+    GDataXMLElement *speedElement = [GDataXMLElement elementWithName:@"Speed" stringValue:@"1"];
     
     [playElement addChild:instanceIDElement];
     

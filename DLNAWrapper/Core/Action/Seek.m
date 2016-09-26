@@ -51,19 +51,15 @@
 
 - (NSData *)postData
 {
-    DDXMLElement *seekElement = [[DDXMLElement alloc] initWithName:@"u:Seek"];
+    GDataXMLElement *seekElement = [GDataXMLElement elementWithName:@"u:Seek"];
     
-    NSMutableArray<DDXMLNode *> *seekAttr = [[NSMutableArray alloc] init];
+    [seekElement addAttribute:[GDataXMLNode attributeWithName:@"xmlns:u" stringValue:SERVICE_TYPE_AVTRANSPORT]];
     
-    [seekAttr addObject:[DDXMLNode attributeWithName:@"xmlns:u" stringValue:SERVICE_TYPE_AVTRANSPORT]];
+    GDataXMLElement *instanceIDElement = [GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"];
     
-    seekElement.attributes = seekAttr;
+    GDataXMLElement *unitElement = [GDataXMLElement elementWithName:@"Unit" stringValue:@"REL_TIME"];
     
-    DDXMLElement *instanceIDElement = [[DDXMLElement alloc] initWithName:@"InstanceID" stringValue:@"0"];
-    
-    DDXMLElement *unitElement = [[DDXMLElement alloc] initWithName:@"Unit" stringValue:@"REL_TIME"];
-    
-    DDXMLElement *targetElement = [[DDXMLElement alloc] initWithName:@"Target" stringValue:targetTime];
+    GDataXMLElement *targetElement = [GDataXMLElement elementWithName:@"Target" stringValue:targetTime];
     
     [seekElement addChild:instanceIDElement];
     

@@ -10,26 +10,22 @@
 
 @implementation ActionBase
 
-- (DDXMLElement *)rootElement
+- (GDataXMLElement *)rootElement
 {
-    DDXMLElement *root = [[DDXMLElement alloc] initWithName:@"s:Envelope"];
+    GDataXMLElement *root = [GDataXMLElement elementWithName:@"s:Envelope"];
     
-    NSMutableArray *rootAttr = [[NSMutableArray alloc] init];
+    [root addAttribute:[GDataXMLNode attributeWithName:@"xmlns:s" stringValue:@"http://schemas.xmlsoap.org/soap/envelope/"]];
     
-    [rootAttr addObject:[DDXMLNode attributeWithName:@"s:encodingStyle" stringValue:@"http://schemas.xmlsoap.org/soap/encoding/"]];
-    
-    [rootAttr addObject:[DDXMLNode attributeWithName:@"xmlns:s" stringValue:@"http://schemas.xmlsoap.org/soap/envelope/"]];
-    
-    root.attributes = rootAttr;
+    [root addAttribute:[GDataXMLNode attributeWithName:@"s:encodingStyle" stringValue:@"http://schemas.xmlsoap.org/soap/encoding/"]];
     
     return root;
 }
 
-- (NSData *)dataXML:(DDXMLElement *)body
+- (NSData *)dataXML:(GDataXMLElement *)body
 {
-    DDXMLElement *rootElement = [self rootElement];
+    GDataXMLElement *rootElement = [self rootElement];
     
-    DDXMLElement *bodyElement = [[DDXMLElement alloc] initWithName:@"s:Body"];
+    GDataXMLElement *bodyElement = [GDataXMLElement elementWithName:@"s:Body"];
     
     [bodyElement addChild:body];
     

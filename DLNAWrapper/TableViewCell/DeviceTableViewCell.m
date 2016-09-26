@@ -34,6 +34,7 @@
         
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.mas_left).offset(20);
+            make.right.equalTo(self.mas_right).offset(-20);
             make.centerY.equalTo(self);
         }];
     }

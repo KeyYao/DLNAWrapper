@@ -6,9 +6,8 @@
 //  Copyright © 2016年 Key. All rights reserved.
 //
 
-#import "AFNetWorking.h"
-#import "KissXML/KissXML.h"
 #import "DLNAUpnpServer.h"
+#import "GDataXMLNode.h"
 
 #import "Config.h"
 #import "MediaControlService.h"
@@ -85,7 +84,6 @@
 
 - (void)parserDeviceLocation:(NSString *)location
 {
-    
     NSRange protocolRange = [location rangeOfString:@"http://" options:NSCaseInsensitiveSearch];
     
     NSString *locationWithoutProtocolStr = [location substringFromIndex:protocolRange.length];
@@ -94,120 +92,132 @@
     
     NSString *address = [[NSString alloc] initWithFormat:@"http://%@", [locationWithoutProtocolStr substringToIndex:addressRange.location]];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:location]];
     
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    request.HTTPMethod = @"GET";
     
-    manager.requestSerializer.timeoutInterval = 5.f;
-    
-    [manager GET:location parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        Device *device = [[Device alloc] init];
-        
-        device.location = location;
-        
-        DDXMLDocument *document = [[DDXMLDocument alloc] initWithData:responseObject options:0 error:nil];
-        
-        DDXMLElement *deviceElement = [[document rootElement] elementForName:@"device"];
-        
-        NSString *deviceName = [[deviceElement elementForName:@"friendlyName"] stringValue];
-        
-        device.name = deviceName;
-        
-        NSArray<DDXMLElement *> *serviceElementList = [[deviceElement elementForName:@"serviceList"] elementsForName:@"service"];
-        
-        for (DDXMLElement *serviceElement in serviceElementList) {
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+
+        if (response != nil) {
             
-            NSString *serviceId = [[serviceElement elementForName:@"serviceId"] stringValue];
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
             
-            if ([serviceId containsString:MEDIA_CONTROL_SERVICE_ID]) {
+            if ([httpResponse statusCode] == 200) {
                 
-                MediaControlService *service = [[MediaControlService alloc] init];
+                Device *device = [[Device alloc] init];
                 
-                service.type = [[serviceElement elementForName:@"serviceType"] stringValue];
+                device.location = location;
                 
-                NSString *format;
+                GDataXMLDocument *document = [[GDataXMLDocument alloc] initWithData:data options:0 error:nil];
                 
-                NSString *controlUrl = [[serviceElement elementForName:@"controlURL"] stringValue];
+                GDataXMLElement *deviceElement = [[[document rootElement] elementsForName:@"device"] objectAtIndex:0];
                 
-                if (![controlUrl hasPrefix:@"/"]) {
+                NSString *deviceName = [[[deviceElement elementsForName:@"friendlyName"] objectAtIndex:0] stringValue];
+                
+                device.name = deviceName;
+                
+                GDataXMLElement *serviceListElement = [[deviceElement elementsForName:@"serviceList"] objectAtIndex:0];
+                
+                NSArray<GDataXMLElement *> *serviceElementArray = [serviceListElement elementsForName:@"service"];
+                
+                for (GDataXMLElement *serviceElement in serviceElementArray) {
                     
-                    format = @"%@/%@";
-                    
-                } else {
-                    
-                    format = @"%@%@";
-                    
+                    NSString *serviceId = [[[serviceElement elementsForName:@"serviceId"] objectAtIndex:0] stringValue];
+        
+                    if ([serviceId containsString:MEDIA_CONTROL_SERVICE_ID]) {
+        
+                        MediaControlService *service = [[MediaControlService alloc] init];
+        
+                        service.type = [[[serviceElement elementsForName:@"serviceType"] objectAtIndex:0] stringValue];
+        
+                        NSString *format;
+        
+                        NSString *controlUrl = [[[serviceElement elementsForName:@"controlURL"] objectAtIndex:0] stringValue];
+        
+                        if (![controlUrl hasPrefix:@"/"]) {
+        
+                            format = @"%@/%@";
+        
+                        } else {
+        
+                            format = @"%@%@";
+        
+                        }
+        
+                        service.controlURL = [NSString stringWithFormat:format, address, controlUrl];
+        
+                        NSString *eventSubUrl = [[[serviceElement elementsForName:@"eventSubURL"] objectAtIndex:0] stringValue];
+        
+                        if (![eventSubUrl hasPrefix:@"/"]) {
+        
+                            format = @"%@/%@";
+        
+                        } else {
+        
+                            format = @"%@%@";
+        
+                        }
+        
+                        service.eventSubURL = [NSString stringWithFormat:format, address, eventSubUrl];
+        
+                        device.mediaControlService = service;
+        
+                        continue;
+                    }
+        
+                    if ([serviceId containsString:RENDERING_CONTROL_SERVICE_ID]) {
+        
+                        RenderingControlService *service = [[RenderingControlService alloc] init];
+        
+                        service.type = [[[serviceElement elementsForName:@"serviceType"] objectAtIndex:0] stringValue];
+        
+                        NSString *format;
+        
+                        NSString *controlUrl = [[[serviceElement elementsForName:@"controlURL"] objectAtIndex:0] stringValue];
+        
+                        if (![controlUrl hasPrefix:@"/"]) {
+        
+                            format = @"%@/%@";
+                            
+                        } else {
+                            
+                            format = @"%@%@";
+                            
+                        }
+                        
+                        service.controlURL = [NSString stringWithFormat:format, address, controlUrl];
+                        
+                        NSString *eventSubUrl = [[[serviceElement elementsForName:@"eventSubURL"] objectAtIndex:0] stringValue];
+                        
+                        if (![eventSubUrl hasPrefix:@"/"]) {
+                            
+                            format = @"%@/%@";
+                            
+                        } else {
+                            
+                            format = @"%@%@";
+                            
+                        }
+                        
+                        service.eventSubURL = [NSString stringWithFormat:format, address, eventSubUrl];
+                        
+                        device.renderingControlService = service;
+                        
+                        continue;
+                    }
                 }
                 
-                service.controlURL = [NSString stringWithFormat:format, address, controlUrl];
-                
-                NSString *eventSubUrl = [[serviceElement elementForName:@"eventSubURL"] stringValue];
-                
-                if (![eventSubUrl hasPrefix:@"/"]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
                     
-                    format = @"%@/%@";
+                    [self addDevice:device];
                     
-                } else {
-                    
-                    format = @"%@%@";
-                    
-                }
+                });
                 
-                service.eventSubURL = [NSString stringWithFormat:format, address, eventSubUrl];
-                
-                device.mediaControlService = service;
-                
-                continue;
-            }
-            
-            if ([serviceId containsString:RENDERING_CONTROL_SERVICE_ID]) {
-                
-                RenderingControlService *service = [[RenderingControlService alloc] init];
-                
-                service.type = [[serviceElement elementForName:@"serviceType"] stringValue];
-                
-                NSString *format;
-                
-                NSString *controlUrl = [[serviceElement elementForName:@"controlURL"] stringValue];
-                
-                if (![controlUrl hasPrefix:@"/"]) {
-                    
-                    format = @"%@/%@";
-                    
-                } else {
-                    
-                    format = @"%@%@";
-                    
-                }
-                
-                service.controlURL = [NSString stringWithFormat:format, address, controlUrl];
-                
-                NSString *eventSubUrl = [[serviceElement elementForName:@"eventSubURL"] stringValue];
-                
-                if (![eventSubUrl hasPrefix:@"/"]) {
-                    
-                    format = @"%@/%@";
-                    
-                } else {
-                    
-                    format = @"%@%@";
-                    
-                }
-                
-                service.eventSubURL = [NSString stringWithFormat:format, address, eventSubUrl];
-                
-                device.renderingControlService = service;
-                
-                continue;
             }
         }
         
-        [self addDevice:device];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-    }];
+    }] resume];
+    
 }
 
 - (void)addDevice:(Device *)device

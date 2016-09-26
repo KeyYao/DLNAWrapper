@@ -7,269 +7,286 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EA3A77EA1D8F7CB900BD7A7C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3A77E91D8F7CB900BD7A7C /* main.m */; };
-		EA3A77ED1D8F7CB900BD7A7C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3A77EC1D8F7CB900BD7A7C /* AppDelegate.m */; };
-		EA3A77F31D8F7CB900BD7A7C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA3A77F11D8F7CB900BD7A7C /* Main.storyboard */; };
-		EA3A77F51D8F7CB900BD7A7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA3A77F41D8F7CB900BD7A7C /* Assets.xcassets */; };
-		EA3A77F81D8F7CB900BD7A7C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA3A77F61D8F7CB900BD7A7C /* LaunchScreen.storyboard */; };
-		EA3A78031D8F7D4200BD7A7C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3A78021D8F7D4200BD7A7C /* MainViewController.m */; };
-		EA3A78071D8F7D7600BD7A7C /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3A78061D8F7D7500BD7A7C /* GCDAsyncUdpSocket.m */; };
-		EA3A780A1D8F7DA100BD7A7C /* DLNAUpnpServer.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3A78091D8F7DA100BD7A7C /* DLNAUpnpServer.m */; };
-		EA3A78101D8F7DE000BD7A7C /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3A780F1D8F7DE000BD7A7C /* Device.m */; };
-		EA3A78131D8F7DF300BD7A7C /* ControlPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3A78121D8F7DF300BD7A7C /* ControlPoint.m */; };
-		EA3A78161D8F7E0B00BD7A7C /* ControlService.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3A78151D8F7E0B00BD7A7C /* ControlService.m */; };
-		EA3A78191D8F7E1E00BD7A7C /* MediaControlService.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3A78181D8F7E1E00BD7A7C /* MediaControlService.m */; };
-		EA3A781C1D8F7E3200BD7A7C /* RenderingControlService.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3A781B1D8F7E3200BD7A7C /* RenderingControlService.m */; };
-		EA3A78221D8F7E7C00BD7A7C /* Play.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3A78211D8F7E7C00BD7A7C /* Play.m */; };
-		EA3A78251D8F7E9500BD7A7C /* Pause.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3A78241D8F7E9500BD7A7C /* Pause.m */; };
-		EA3A78281D8F7EAF00BD7A7C /* Stop.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3A78271D8F7EAF00BD7A7C /* Stop.m */; };
-		EA3A782B1D8F7ECE00BD7A7C /* Seek.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3A782A1D8F7ECE00BD7A7C /* Seek.m */; };
-		EA3A782E1D8F7EF000BD7A7C /* GetPositionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3A782D1D8F7EF000BD7A7C /* GetPositionInfo.m */; };
-		EA3A78311D8F7F1600BD7A7C /* GetVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3A78301D8F7F1600BD7A7C /* GetVolume.m */; };
-		EA3A78341D8F7F3700BD7A7C /* SetVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3A78331D8F7F3700BD7A7C /* SetVolume.m */; };
-		EA3C62271D94C8F0003F6CE6 /* ModelUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3C62261D94C8F0003F6CE6 /* ModelUtils.m */; };
-		EA3F90B91D923BA50002DF74 /* DeviceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3F90B81D923BA50002DF74 /* DeviceTableViewCell.m */; };
-		EA3F90BC1D926D4F0002DF74 /* DMCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3F90BB1D926D4F0002DF74 /* DMCViewController.m */; };
-		EA4098D31D9113D60047CEF1 /* DeviceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4098D21D9113D60047CEF1 /* DeviceListViewController.m */; };
-		EA4098D61D9122780047CEF1 /* SetURI.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4098D51D9122780047CEF1 /* SetURI.m */; };
-		EA4098DA1D912BED0047CEF1 /* ActionBase.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4098D91D912BED0047CEF1 /* ActionBase.m */; };
-		F9EA210D8D3E1FF61D2C8C54 /* Pods_DLNAWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B396FB32D3DC9D60ADC14150 /* Pods_DLNAWrapper.framework */; };
+		7A1B7109AFB88B0E55D4E605 /* Pods_DLNAWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD8D4BB45854C61A92BDA53 /* Pods_DLNAWrapper.framework */; };
+		EA3F191C1D98B9D400F06A6E /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3F191B1D98B9D400F06A6E /* libxml2.2.tbd */; };
+		EA5ACA4F1D98B6EA00E6B85C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA4E1D98B6EA00E6B85C /* main.m */; };
+		EA5ACA581D98B6EA00E6B85C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA5ACA561D98B6EA00E6B85C /* Main.storyboard */; };
+		EA5ACA5A1D98B6EA00E6B85C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA5ACA591D98B6EA00E6B85C /* Assets.xcassets */; };
+		EA5ACA5D1D98B6EA00E6B85C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA5ACA5B1D98B6EA00E6B85C /* LaunchScreen.storyboard */; };
+		EA5ACA661D98B72400E6B85C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA651D98B72400E6B85C /* AppDelegate.m */; };
+		EA5ACA9D1D98B72A00E6B85C /* ActionBase.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA6A1D98B72A00E6B85C /* ActionBase.m */; };
+		EA5ACA9E1D98B72A00E6B85C /* GetPositionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA6D1D98B72A00E6B85C /* GetPositionInfo.m */; };
+		EA5ACA9F1D98B72A00E6B85C /* GetVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA6F1D98B72A00E6B85C /* GetVolume.m */; };
+		EA5ACAA01D98B72A00E6B85C /* Pause.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA711D98B72A00E6B85C /* Pause.m */; };
+		EA5ACAA11D98B72A00E6B85C /* Play.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA731D98B72A00E6B85C /* Play.m */; };
+		EA5ACAA21D98B72A00E6B85C /* Seek.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA751D98B72A00E6B85C /* Seek.m */; };
+		EA5ACAA31D98B72A00E6B85C /* SetURI.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA771D98B72A00E6B85C /* SetURI.m */; };
+		EA5ACAA41D98B72A00E6B85C /* SetVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA791D98B72A00E6B85C /* SetVolume.m */; };
+		EA5ACAA51D98B72A00E6B85C /* Stop.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA7B1D98B72A00E6B85C /* Stop.m */; };
+		EA5ACAA61D98B72A00E6B85C /* ControlPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA7E1D98B72A00E6B85C /* ControlPoint.m */; };
+		EA5ACAA71D98B72A00E6B85C /* ControlService.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA811D98B72A00E6B85C /* ControlService.m */; };
+		EA5ACAA81D98B72A00E6B85C /* MediaControlService.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA831D98B72A00E6B85C /* MediaControlService.m */; };
+		EA5ACAA91D98B72A00E6B85C /* RenderingControlService.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA851D98B72A00E6B85C /* RenderingControlService.m */; };
+		EA5ACAAA1D98B72A00E6B85C /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA871D98B72A00E6B85C /* Device.m */; };
+		EA5ACAAB1D98B72A00E6B85C /* DLNAUpnpServer.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA8A1D98B72A00E6B85C /* DLNAUpnpServer.m */; };
+		EA5ACAAC1D98B72A00E6B85C /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA8D1D98B72A00E6B85C /* GCDAsyncUdpSocket.m */; };
+		EA5ACAAD1D98B72A00E6B85C /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA901D98B72A00E6B85C /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		EA5ACAAE1D98B72A00E6B85C /* ModelUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA921D98B72A00E6B85C /* ModelUtils.m */; };
+		EA5ACAAF1D98B72A00E6B85C /* DeviceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA951D98B72A00E6B85C /* DeviceTableViewCell.m */; };
+		EA5ACAB01D98B72A00E6B85C /* DeviceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA981D98B72A00E6B85C /* DeviceListViewController.m */; };
+		EA5ACAB11D98B72A00E6B85C /* DMCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA9A1D98B72A00E6B85C /* DMCViewController.m */; };
+		EA5ACAB21D98B72A00E6B85C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA9C1D98B72A00E6B85C /* MainViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		16F81FCBB683FB03447208F2 /* Pods-DLNAWrapper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DLNAWrapper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DLNAWrapper/Pods-DLNAWrapper.debug.xcconfig"; sourceTree = "<group>"; };
-		21C58E82F9D5A57AC26E0007 /* Pods-DLNAWrapper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DLNAWrapper.release.xcconfig"; path = "Pods/Target Support Files/Pods-DLNAWrapper/Pods-DLNAWrapper.release.xcconfig"; sourceTree = "<group>"; };
-		B396FB32D3DC9D60ADC14150 /* Pods_DLNAWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DLNAWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA3A77E51D8F7CB900BD7A7C /* DLNAWrapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DLNAWrapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA3A77E91D8F7CB900BD7A7C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		EA3A77EB1D8F7CB900BD7A7C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		EA3A77EC1D8F7CB900BD7A7C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		EA3A77F21D8F7CB900BD7A7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		EA3A77F41D8F7CB900BD7A7C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		EA3A77F71D8F7CB900BD7A7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		EA3A77F91D8F7CB900BD7A7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EA3A78011D8F7D4200BD7A7C /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = ViewController/MainViewController.h; sourceTree = "<group>"; };
-		EA3A78021D8F7D4200BD7A7C /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = ViewController/MainViewController.m; sourceTree = "<group>"; };
-		EA3A78051D8F7D7500BD7A7C /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncUdpSocket.h; path = Core/GCDAsyncUdpSocket/GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
-		EA3A78061D8F7D7500BD7A7C /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncUdpSocket.m; path = Core/GCDAsyncUdpSocket/GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
-		EA3A78081D8F7DA100BD7A7C /* DLNAUpnpServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLNAUpnpServer.h; path = Core/DLNAUpnpServer.h; sourceTree = "<group>"; };
-		EA3A78091D8F7DA100BD7A7C /* DLNAUpnpServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLNAUpnpServer.m; path = Core/DLNAUpnpServer.m; sourceTree = "<group>"; };
-		EA3A780D1D8F7DCC00BD7A7C /* DeviceChangeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceChangeDelegate.h; path = Core/DeviceChangeDelegate.h; sourceTree = "<group>"; };
-		EA3A780E1D8F7DE000BD7A7C /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Device.h; path = Core/Device.h; sourceTree = "<group>"; };
-		EA3A780F1D8F7DE000BD7A7C /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Device.m; path = Core/Device.m; sourceTree = "<group>"; };
-		EA3A78111D8F7DF300BD7A7C /* ControlPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControlPoint.h; path = Core/ControlPoint.h; sourceTree = "<group>"; };
-		EA3A78121D8F7DF300BD7A7C /* ControlPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ControlPoint.m; path = Core/ControlPoint.m; sourceTree = "<group>"; };
-		EA3A78141D8F7E0B00BD7A7C /* ControlService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControlService.h; path = Core/ControlService/ControlService.h; sourceTree = "<group>"; };
-		EA3A78151D8F7E0B00BD7A7C /* ControlService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ControlService.m; path = Core/ControlService/ControlService.m; sourceTree = "<group>"; };
-		EA3A78171D8F7E1E00BD7A7C /* MediaControlService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MediaControlService.h; path = Core/ControlService/MediaControlService.h; sourceTree = "<group>"; };
-		EA3A78181D8F7E1E00BD7A7C /* MediaControlService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MediaControlService.m; path = Core/ControlService/MediaControlService.m; sourceTree = "<group>"; };
-		EA3A781A1D8F7E3200BD7A7C /* RenderingControlService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderingControlService.h; path = Core/ControlService/RenderingControlService.h; sourceTree = "<group>"; };
-		EA3A781B1D8F7E3200BD7A7C /* RenderingControlService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RenderingControlService.m; path = Core/ControlService/RenderingControlService.m; sourceTree = "<group>"; };
-		EA3A78201D8F7E7C00BD7A7C /* Play.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Play.h; path = Core/Action/Play.h; sourceTree = "<group>"; };
-		EA3A78211D8F7E7C00BD7A7C /* Play.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Play.m; path = Core/Action/Play.m; sourceTree = "<group>"; };
-		EA3A78231D8F7E9500BD7A7C /* Pause.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pause.h; path = Core/Action/Pause.h; sourceTree = "<group>"; };
-		EA3A78241D8F7E9500BD7A7C /* Pause.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Pause.m; path = Core/Action/Pause.m; sourceTree = "<group>"; };
-		EA3A78261D8F7EAF00BD7A7C /* Stop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Stop.h; path = Core/Action/Stop.h; sourceTree = "<group>"; };
-		EA3A78271D8F7EAF00BD7A7C /* Stop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Stop.m; path = Core/Action/Stop.m; sourceTree = "<group>"; };
-		EA3A78291D8F7ECE00BD7A7C /* Seek.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Seek.h; path = Core/Action/Seek.h; sourceTree = "<group>"; };
-		EA3A782A1D8F7ECE00BD7A7C /* Seek.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Seek.m; path = Core/Action/Seek.m; sourceTree = "<group>"; };
-		EA3A782C1D8F7EF000BD7A7C /* GetPositionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetPositionInfo.h; path = Core/Action/GetPositionInfo.h; sourceTree = "<group>"; };
-		EA3A782D1D8F7EF000BD7A7C /* GetPositionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetPositionInfo.m; path = Core/Action/GetPositionInfo.m; sourceTree = "<group>"; };
-		EA3A782F1D8F7F1600BD7A7C /* GetVolume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetVolume.h; path = Core/Action/GetVolume.h; sourceTree = "<group>"; };
-		EA3A78301D8F7F1600BD7A7C /* GetVolume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetVolume.m; path = Core/Action/GetVolume.m; sourceTree = "<group>"; };
-		EA3A78321D8F7F3700BD7A7C /* SetVolume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetVolume.h; path = Core/Action/SetVolume.h; sourceTree = "<group>"; };
-		EA3A78331D8F7F3700BD7A7C /* SetVolume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetVolume.m; path = Core/Action/SetVolume.m; sourceTree = "<group>"; };
-		EA3C62251D94C8F0003F6CE6 /* ModelUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelUtils.h; path = Core/ModelUtils.h; sourceTree = "<group>"; };
-		EA3C62261D94C8F0003F6CE6 /* ModelUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModelUtils.m; path = Core/ModelUtils.m; sourceTree = "<group>"; };
-		EA3C62291D95087F003F6CE6 /* Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Config.h; path = Core/Config.h; sourceTree = "<group>"; };
-		EA3F90B71D923BA50002DF74 /* DeviceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceTableViewCell.h; path = TableViewCell/DeviceTableViewCell.h; sourceTree = "<group>"; };
-		EA3F90B81D923BA50002DF74 /* DeviceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceTableViewCell.m; path = TableViewCell/DeviceTableViewCell.m; sourceTree = "<group>"; };
-		EA3F90BA1D926D4F0002DF74 /* DMCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMCViewController.h; path = ViewController/DMCViewController.h; sourceTree = "<group>"; };
-		EA3F90BB1D926D4F0002DF74 /* DMCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMCViewController.m; path = ViewController/DMCViewController.m; sourceTree = "<group>"; };
-		EA4098D11D9113D60047CEF1 /* DeviceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceListViewController.h; path = ViewController/DeviceListViewController.h; sourceTree = "<group>"; };
-		EA4098D21D9113D60047CEF1 /* DeviceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceListViewController.m; path = ViewController/DeviceListViewController.m; sourceTree = "<group>"; };
-		EA4098D41D9122780047CEF1 /* SetURI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetURI.h; path = Core/Action/SetURI.h; sourceTree = "<group>"; };
-		EA4098D51D9122780047CEF1 /* SetURI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetURI.m; path = Core/Action/SetURI.m; sourceTree = "<group>"; };
-		EA4098D71D9122E40047CEF1 /* ActionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionDelegate.h; path = Core/Action/ActionDelegate.h; sourceTree = "<group>"; };
-		EA4098D81D912BED0047CEF1 /* ActionBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionBase.h; path = Core/Action/ActionBase.h; sourceTree = "<group>"; };
-		EA4098D91D912BED0047CEF1 /* ActionBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionBase.m; path = Core/Action/ActionBase.m; sourceTree = "<group>"; };
+		9BE4E0DA7F0D02901DBF2950 /* Pods-DLNAWrapper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DLNAWrapper.release.xcconfig"; path = "Pods/Target Support Files/Pods-DLNAWrapper/Pods-DLNAWrapper.release.xcconfig"; sourceTree = "<group>"; };
+		AAD8D4BB45854C61A92BDA53 /* Pods_DLNAWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DLNAWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA3F191B1D98B9D400F06A6E /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
+		EA5ACA4A1D98B6EA00E6B85C /* DLNAWrapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DLNAWrapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA5ACA4E1D98B6EA00E6B85C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EA5ACA571D98B6EA00E6B85C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EA5ACA591D98B6EA00E6B85C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EA5ACA5C1D98B6EA00E6B85C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EA5ACA5E1D98B6EA00E6B85C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA5ACA641D98B72400E6B85C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EA5ACA651D98B72400E6B85C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EA5ACA691D98B72A00E6B85C /* ActionBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionBase.h; sourceTree = "<group>"; };
+		EA5ACA6A1D98B72A00E6B85C /* ActionBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionBase.m; sourceTree = "<group>"; };
+		EA5ACA6B1D98B72A00E6B85C /* ActionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionDelegate.h; sourceTree = "<group>"; };
+		EA5ACA6C1D98B72A00E6B85C /* GetPositionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetPositionInfo.h; sourceTree = "<group>"; };
+		EA5ACA6D1D98B72A00E6B85C /* GetPositionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetPositionInfo.m; sourceTree = "<group>"; };
+		EA5ACA6E1D98B72A00E6B85C /* GetVolume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetVolume.h; sourceTree = "<group>"; };
+		EA5ACA6F1D98B72A00E6B85C /* GetVolume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetVolume.m; sourceTree = "<group>"; };
+		EA5ACA701D98B72A00E6B85C /* Pause.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pause.h; sourceTree = "<group>"; };
+		EA5ACA711D98B72A00E6B85C /* Pause.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pause.m; sourceTree = "<group>"; };
+		EA5ACA721D98B72A00E6B85C /* Play.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Play.h; sourceTree = "<group>"; };
+		EA5ACA731D98B72A00E6B85C /* Play.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Play.m; sourceTree = "<group>"; };
+		EA5ACA741D98B72A00E6B85C /* Seek.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Seek.h; sourceTree = "<group>"; };
+		EA5ACA751D98B72A00E6B85C /* Seek.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Seek.m; sourceTree = "<group>"; };
+		EA5ACA761D98B72A00E6B85C /* SetURI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetURI.h; sourceTree = "<group>"; };
+		EA5ACA771D98B72A00E6B85C /* SetURI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetURI.m; sourceTree = "<group>"; };
+		EA5ACA781D98B72A00E6B85C /* SetVolume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetVolume.h; sourceTree = "<group>"; };
+		EA5ACA791D98B72A00E6B85C /* SetVolume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetVolume.m; sourceTree = "<group>"; };
+		EA5ACA7A1D98B72A00E6B85C /* Stop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stop.h; sourceTree = "<group>"; };
+		EA5ACA7B1D98B72A00E6B85C /* Stop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stop.m; sourceTree = "<group>"; };
+		EA5ACA7C1D98B72A00E6B85C /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
+		EA5ACA7D1D98B72A00E6B85C /* ControlPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlPoint.h; sourceTree = "<group>"; };
+		EA5ACA7E1D98B72A00E6B85C /* ControlPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlPoint.m; sourceTree = "<group>"; };
+		EA5ACA801D98B72A00E6B85C /* ControlService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlService.h; sourceTree = "<group>"; };
+		EA5ACA811D98B72A00E6B85C /* ControlService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlService.m; sourceTree = "<group>"; };
+		EA5ACA821D98B72A00E6B85C /* MediaControlService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaControlService.h; sourceTree = "<group>"; };
+		EA5ACA831D98B72A00E6B85C /* MediaControlService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaControlService.m; sourceTree = "<group>"; };
+		EA5ACA841D98B72A00E6B85C /* RenderingControlService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderingControlService.h; sourceTree = "<group>"; };
+		EA5ACA851D98B72A00E6B85C /* RenderingControlService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenderingControlService.m; sourceTree = "<group>"; };
+		EA5ACA861D98B72A00E6B85C /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
+		EA5ACA871D98B72A00E6B85C /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
+		EA5ACA881D98B72A00E6B85C /* DeviceChangeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceChangeDelegate.h; sourceTree = "<group>"; };
+		EA5ACA891D98B72A00E6B85C /* DLNAUpnpServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLNAUpnpServer.h; sourceTree = "<group>"; };
+		EA5ACA8A1D98B72A00E6B85C /* DLNAUpnpServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLNAUpnpServer.m; sourceTree = "<group>"; };
+		EA5ACA8C1D98B72A00E6B85C /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		EA5ACA8D1D98B72A00E6B85C /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		EA5ACA8F1D98B72A00E6B85C /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		EA5ACA901D98B72A00E6B85C /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		EA5ACA911D98B72A00E6B85C /* ModelUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelUtils.h; sourceTree = "<group>"; };
+		EA5ACA921D98B72A00E6B85C /* ModelUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelUtils.m; sourceTree = "<group>"; };
+		EA5ACA941D98B72A00E6B85C /* DeviceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceTableViewCell.h; sourceTree = "<group>"; };
+		EA5ACA951D98B72A00E6B85C /* DeviceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceTableViewCell.m; sourceTree = "<group>"; };
+		EA5ACA971D98B72A00E6B85C /* DeviceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceListViewController.h; sourceTree = "<group>"; };
+		EA5ACA981D98B72A00E6B85C /* DeviceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceListViewController.m; sourceTree = "<group>"; };
+		EA5ACA991D98B72A00E6B85C /* DMCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMCViewController.h; sourceTree = "<group>"; };
+		EA5ACA9A1D98B72A00E6B85C /* DMCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMCViewController.m; sourceTree = "<group>"; };
+		EA5ACA9B1D98B72A00E6B85C /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		EA5ACA9C1D98B72A00E6B85C /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		F63A6BF622378B432ABE3D36 /* Pods-DLNAWrapper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DLNAWrapper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DLNAWrapper/Pods-DLNAWrapper.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		EA3A77E21D8F7CB900BD7A7C /* Frameworks */ = {
+		EA5ACA471D98B6EA00E6B85C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9EA210D8D3E1FF61D2C8C54 /* Pods_DLNAWrapper.framework in Frameworks */,
+				EA3F191C1D98B9D400F06A6E /* libxml2.2.tbd in Frameworks */,
+				7A1B7109AFB88B0E55D4E605 /* Pods_DLNAWrapper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		25984D478EE7E3582713959F /* Frameworks */ = {
+		4DC393ED077D3439B9416970 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B396FB32D3DC9D60ADC14150 /* Pods_DLNAWrapper.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		B5F683D190243B2E3EE39566 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				16F81FCBB683FB03447208F2 /* Pods-DLNAWrapper.debug.xcconfig */,
-				21C58E82F9D5A57AC26E0007 /* Pods-DLNAWrapper.release.xcconfig */,
+				F63A6BF622378B432ABE3D36 /* Pods-DLNAWrapper.debug.xcconfig */,
+				9BE4E0DA7F0D02901DBF2950 /* Pods-DLNAWrapper.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		EA3A77DC1D8F7CB900BD7A7C = {
+		908D6FF12676E258E4275B85 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EA3A77E71D8F7CB900BD7A7C /* DLNAWrapper */,
-				EA3A77E61D8F7CB900BD7A7C /* Products */,
-				B5F683D190243B2E3EE39566 /* Pods */,
-				25984D478EE7E3582713959F /* Frameworks */,
+				EA3F191B1D98B9D400F06A6E /* libxml2.2.tbd */,
+				AAD8D4BB45854C61A92BDA53 /* Pods_DLNAWrapper.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EA5ACA411D98B6EA00E6B85C = {
+			isa = PBXGroup;
+			children = (
+				EA5ACA4C1D98B6EA00E6B85C /* DLNAWrapper */,
+				EA5ACA4B1D98B6EA00E6B85C /* Products */,
+				4DC393ED077D3439B9416970 /* Pods */,
+				908D6FF12676E258E4275B85 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		EA3A77E61D8F7CB900BD7A7C /* Products */ = {
+		EA5ACA4B1D98B6EA00E6B85C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EA3A77E51D8F7CB900BD7A7C /* DLNAWrapper.app */,
+				EA5ACA4A1D98B6EA00E6B85C /* DLNAWrapper.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		EA3A77E71D8F7CB900BD7A7C /* DLNAWrapper */ = {
+		EA5ACA4C1D98B6EA00E6B85C /* DLNAWrapper */ = {
 			isa = PBXGroup;
 			children = (
-				EA3A77FF1D8F7D3000BD7A7C /* Core */,
-				EA3F90B61D923B530002DF74 /* TableViewCell */,
-				EA3A78001D8F7D3400BD7A7C /* ViewController */,
-				EA3A77EB1D8F7CB900BD7A7C /* AppDelegate.h */,
-				EA3A77EC1D8F7CB900BD7A7C /* AppDelegate.m */,
-				EA3A77F11D8F7CB900BD7A7C /* Main.storyboard */,
-				EA3A77F41D8F7CB900BD7A7C /* Assets.xcassets */,
-				EA3A77F61D8F7CB900BD7A7C /* LaunchScreen.storyboard */,
-				EA3A77F91D8F7CB900BD7A7C /* Info.plist */,
-				EA3A77E81D8F7CB900BD7A7C /* Supporting Files */,
+				EA5ACA671D98B72A00E6B85C /* Core */,
+				EA5ACA931D98B72A00E6B85C /* TableViewCell */,
+				EA5ACA961D98B72A00E6B85C /* ViewController */,
+				EA5ACA641D98B72400E6B85C /* AppDelegate.h */,
+				EA5ACA651D98B72400E6B85C /* AppDelegate.m */,
+				EA5ACA561D98B6EA00E6B85C /* Main.storyboard */,
+				EA5ACA591D98B6EA00E6B85C /* Assets.xcassets */,
+				EA5ACA5B1D98B6EA00E6B85C /* LaunchScreen.storyboard */,
+				EA5ACA5E1D98B6EA00E6B85C /* Info.plist */,
+				EA5ACA4D1D98B6EA00E6B85C /* Supporting Files */,
 			);
 			path = DLNAWrapper;
 			sourceTree = "<group>";
 		};
-		EA3A77E81D8F7CB900BD7A7C /* Supporting Files */ = {
+		EA5ACA4D1D98B6EA00E6B85C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				EA3A77E91D8F7CB900BD7A7C /* main.m */,
+				EA5ACA4E1D98B6EA00E6B85C /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		EA3A77FF1D8F7D3000BD7A7C /* Core */ = {
+		EA5ACA671D98B72A00E6B85C /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				EA3A780C1D8F7DB400BD7A7C /* Action */,
-				EA3A780B1D8F7DA900BD7A7C /* ControlService */,
-				EA3A78041D8F7D6000BD7A7C /* GCDAsyncUdpSocket */,
-				EA3A78081D8F7DA100BD7A7C /* DLNAUpnpServer.h */,
-				EA3A78091D8F7DA100BD7A7C /* DLNAUpnpServer.m */,
-				EA3A780D1D8F7DCC00BD7A7C /* DeviceChangeDelegate.h */,
-				EA3A780E1D8F7DE000BD7A7C /* Device.h */,
-				EA3A780F1D8F7DE000BD7A7C /* Device.m */,
-				EA3A78111D8F7DF300BD7A7C /* ControlPoint.h */,
-				EA3A78121D8F7DF300BD7A7C /* ControlPoint.m */,
-				EA3C62251D94C8F0003F6CE6 /* ModelUtils.h */,
-				EA3C62261D94C8F0003F6CE6 /* ModelUtils.m */,
-				EA3C62291D95087F003F6CE6 /* Config.h */,
+				EA5ACA8B1D98B72A00E6B85C /* GCDAsyncUdpSocket */,
+				EA5ACA8E1D98B72A00E6B85C /* GDataXML */,
+				EA5ACA7F1D98B72A00E6B85C /* ControlService */,
+				EA5ACA681D98B72A00E6B85C /* Action */,
+				EA5ACA7C1D98B72A00E6B85C /* Config.h */,
+				EA5ACA891D98B72A00E6B85C /* DLNAUpnpServer.h */,
+				EA5ACA8A1D98B72A00E6B85C /* DLNAUpnpServer.m */,
+				EA5ACA7D1D98B72A00E6B85C /* ControlPoint.h */,
+				EA5ACA7E1D98B72A00E6B85C /* ControlPoint.m */,
+				EA5ACA861D98B72A00E6B85C /* Device.h */,
+				EA5ACA871D98B72A00E6B85C /* Device.m */,
+				EA5ACA881D98B72A00E6B85C /* DeviceChangeDelegate.h */,
+				EA5ACA911D98B72A00E6B85C /* ModelUtils.h */,
+				EA5ACA921D98B72A00E6B85C /* ModelUtils.m */,
 			);
-			name = Core;
+			path = Core;
 			sourceTree = "<group>";
 		};
-		EA3A78001D8F7D3400BD7A7C /* ViewController */ = {
+		EA5ACA681D98B72A00E6B85C /* Action */ = {
 			isa = PBXGroup;
 			children = (
-				EA3A78011D8F7D4200BD7A7C /* MainViewController.h */,
-				EA3A78021D8F7D4200BD7A7C /* MainViewController.m */,
-				EA4098D11D9113D60047CEF1 /* DeviceListViewController.h */,
-				EA4098D21D9113D60047CEF1 /* DeviceListViewController.m */,
-				EA3F90BA1D926D4F0002DF74 /* DMCViewController.h */,
-				EA3F90BB1D926D4F0002DF74 /* DMCViewController.m */,
+				EA5ACA691D98B72A00E6B85C /* ActionBase.h */,
+				EA5ACA6A1D98B72A00E6B85C /* ActionBase.m */,
+				EA5ACA6B1D98B72A00E6B85C /* ActionDelegate.h */,
+				EA5ACA6C1D98B72A00E6B85C /* GetPositionInfo.h */,
+				EA5ACA6D1D98B72A00E6B85C /* GetPositionInfo.m */,
+				EA5ACA6E1D98B72A00E6B85C /* GetVolume.h */,
+				EA5ACA6F1D98B72A00E6B85C /* GetVolume.m */,
+				EA5ACA701D98B72A00E6B85C /* Pause.h */,
+				EA5ACA711D98B72A00E6B85C /* Pause.m */,
+				EA5ACA721D98B72A00E6B85C /* Play.h */,
+				EA5ACA731D98B72A00E6B85C /* Play.m */,
+				EA5ACA741D98B72A00E6B85C /* Seek.h */,
+				EA5ACA751D98B72A00E6B85C /* Seek.m */,
+				EA5ACA761D98B72A00E6B85C /* SetURI.h */,
+				EA5ACA771D98B72A00E6B85C /* SetURI.m */,
+				EA5ACA781D98B72A00E6B85C /* SetVolume.h */,
+				EA5ACA791D98B72A00E6B85C /* SetVolume.m */,
+				EA5ACA7A1D98B72A00E6B85C /* Stop.h */,
+				EA5ACA7B1D98B72A00E6B85C /* Stop.m */,
 			);
-			name = ViewController;
+			path = Action;
 			sourceTree = "<group>";
 		};
-		EA3A78041D8F7D6000BD7A7C /* GCDAsyncUdpSocket */ = {
+		EA5ACA7F1D98B72A00E6B85C /* ControlService */ = {
 			isa = PBXGroup;
 			children = (
-				EA3A78051D8F7D7500BD7A7C /* GCDAsyncUdpSocket.h */,
-				EA3A78061D8F7D7500BD7A7C /* GCDAsyncUdpSocket.m */,
+				EA5ACA801D98B72A00E6B85C /* ControlService.h */,
+				EA5ACA811D98B72A00E6B85C /* ControlService.m */,
+				EA5ACA821D98B72A00E6B85C /* MediaControlService.h */,
+				EA5ACA831D98B72A00E6B85C /* MediaControlService.m */,
+				EA5ACA841D98B72A00E6B85C /* RenderingControlService.h */,
+				EA5ACA851D98B72A00E6B85C /* RenderingControlService.m */,
 			);
-			name = GCDAsyncUdpSocket;
+			path = ControlService;
 			sourceTree = "<group>";
 		};
-		EA3A780B1D8F7DA900BD7A7C /* ControlService */ = {
+		EA5ACA8B1D98B72A00E6B85C /* GCDAsyncUdpSocket */ = {
 			isa = PBXGroup;
 			children = (
-				EA3A78141D8F7E0B00BD7A7C /* ControlService.h */,
-				EA3A78151D8F7E0B00BD7A7C /* ControlService.m */,
-				EA3A78171D8F7E1E00BD7A7C /* MediaControlService.h */,
-				EA3A78181D8F7E1E00BD7A7C /* MediaControlService.m */,
-				EA3A781A1D8F7E3200BD7A7C /* RenderingControlService.h */,
-				EA3A781B1D8F7E3200BD7A7C /* RenderingControlService.m */,
+				EA5ACA8C1D98B72A00E6B85C /* GCDAsyncUdpSocket.h */,
+				EA5ACA8D1D98B72A00E6B85C /* GCDAsyncUdpSocket.m */,
 			);
-			name = ControlService;
+			path = GCDAsyncUdpSocket;
 			sourceTree = "<group>";
 		};
-		EA3A780C1D8F7DB400BD7A7C /* Action */ = {
+		EA5ACA8E1D98B72A00E6B85C /* GDataXML */ = {
 			isa = PBXGroup;
 			children = (
-				EA4098D71D9122E40047CEF1 /* ActionDelegate.h */,
-				EA4098D81D912BED0047CEF1 /* ActionBase.h */,
-				EA4098D91D912BED0047CEF1 /* ActionBase.m */,
-				EA4098D41D9122780047CEF1 /* SetURI.h */,
-				EA4098D51D9122780047CEF1 /* SetURI.m */,
-				EA3A78201D8F7E7C00BD7A7C /* Play.h */,
-				EA3A78211D8F7E7C00BD7A7C /* Play.m */,
-				EA3A78231D8F7E9500BD7A7C /* Pause.h */,
-				EA3A78241D8F7E9500BD7A7C /* Pause.m */,
-				EA3A78261D8F7EAF00BD7A7C /* Stop.h */,
-				EA3A78271D8F7EAF00BD7A7C /* Stop.m */,
-				EA3A78291D8F7ECE00BD7A7C /* Seek.h */,
-				EA3A782A1D8F7ECE00BD7A7C /* Seek.m */,
-				EA3A782C1D8F7EF000BD7A7C /* GetPositionInfo.h */,
-				EA3A782D1D8F7EF000BD7A7C /* GetPositionInfo.m */,
-				EA3A782F1D8F7F1600BD7A7C /* GetVolume.h */,
-				EA3A78301D8F7F1600BD7A7C /* GetVolume.m */,
-				EA3A78321D8F7F3700BD7A7C /* SetVolume.h */,
-				EA3A78331D8F7F3700BD7A7C /* SetVolume.m */,
+				EA5ACA8F1D98B72A00E6B85C /* GDataXMLNode.h */,
+				EA5ACA901D98B72A00E6B85C /* GDataXMLNode.m */,
 			);
-			name = Action;
+			path = GDataXML;
 			sourceTree = "<group>";
 		};
-		EA3F90B61D923B530002DF74 /* TableViewCell */ = {
+		EA5ACA931D98B72A00E6B85C /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				EA3F90B71D923BA50002DF74 /* DeviceTableViewCell.h */,
-				EA3F90B81D923BA50002DF74 /* DeviceTableViewCell.m */,
+				EA5ACA941D98B72A00E6B85C /* DeviceTableViewCell.h */,
+				EA5ACA951D98B72A00E6B85C /* DeviceTableViewCell.m */,
 			);
-			name = TableViewCell;
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		EA5ACA961D98B72A00E6B85C /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EA5ACA971D98B72A00E6B85C /* DeviceListViewController.h */,
+				EA5ACA981D98B72A00E6B85C /* DeviceListViewController.m */,
+				EA5ACA991D98B72A00E6B85C /* DMCViewController.h */,
+				EA5ACA9A1D98B72A00E6B85C /* DMCViewController.m */,
+				EA5ACA9B1D98B72A00E6B85C /* MainViewController.h */,
+				EA5ACA9C1D98B72A00E6B85C /* MainViewController.m */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		EA3A77E41D8F7CB900BD7A7C /* DLNAWrapper */ = {
+		EA5ACA491D98B6EA00E6B85C /* DLNAWrapper */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EA3A77FC1D8F7CB900BD7A7C /* Build configuration list for PBXNativeTarget "DLNAWrapper" */;
+			buildConfigurationList = EA5ACA611D98B6EA00E6B85C /* Build configuration list for PBXNativeTarget "DLNAWrapper" */;
 			buildPhases = (
-				CAE95C9D8316ECA9C3BA6D87 /* Check Pods Manifest.lock */,
-				EA3A77E11D8F7CB900BD7A7C /* Sources */,
-				EA3A77E21D8F7CB900BD7A7C /* Frameworks */,
-				EA3A77E31D8F7CB900BD7A7C /* Resources */,
-				722AF4B8F9F4065476A2FAA6 /* Embed Pods Frameworks */,
-				8324E7E0DAF38FD9B15D06D3 /* Copy Pods Resources */,
+				D0F2B279C5F90DC27A997419 /* Check Pods Manifest.lock */,
+				EA5ACA461D98B6EA00E6B85C /* Sources */,
+				EA5ACA471D98B6EA00E6B85C /* Frameworks */,
+				EA5ACA481D98B6EA00E6B85C /* Resources */,
+				D955FD86299B5BD8C2E7B488 /* Embed Pods Frameworks */,
+				217661C3CE2F2DD86AA4FC81 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -277,24 +294,24 @@
 			);
 			name = DLNAWrapper;
 			productName = DLNAWrapper;
-			productReference = EA3A77E51D8F7CB900BD7A7C /* DLNAWrapper.app */;
+			productReference = EA5ACA4A1D98B6EA00E6B85C /* DLNAWrapper.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		EA3A77DD1D8F7CB900BD7A7C /* Project object */ = {
+		EA5ACA421D98B6EA00E6B85C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = Key;
 				TargetAttributes = {
-					EA3A77E41D8F7CB900BD7A7C = {
+					EA5ACA491D98B6EA00E6B85C = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
 				};
 			};
-			buildConfigurationList = EA3A77E01D8F7CB900BD7A7C /* Build configuration list for PBXProject "DLNAWrapper" */;
+			buildConfigurationList = EA5ACA451D98B6EA00E6B85C /* Build configuration list for PBXProject "DLNAWrapper" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -302,46 +319,31 @@
 				en,
 				Base,
 			);
-			mainGroup = EA3A77DC1D8F7CB900BD7A7C;
-			productRefGroup = EA3A77E61D8F7CB900BD7A7C /* Products */;
+			mainGroup = EA5ACA411D98B6EA00E6B85C;
+			productRefGroup = EA5ACA4B1D98B6EA00E6B85C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EA3A77E41D8F7CB900BD7A7C /* DLNAWrapper */,
+				EA5ACA491D98B6EA00E6B85C /* DLNAWrapper */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		EA3A77E31D8F7CB900BD7A7C /* Resources */ = {
+		EA5ACA481D98B6EA00E6B85C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA3A77F81D8F7CB900BD7A7C /* LaunchScreen.storyboard in Resources */,
-				EA3A77F51D8F7CB900BD7A7C /* Assets.xcassets in Resources */,
-				EA3A77F31D8F7CB900BD7A7C /* Main.storyboard in Resources */,
+				EA5ACA5D1D98B6EA00E6B85C /* LaunchScreen.storyboard in Resources */,
+				EA5ACA5A1D98B6EA00E6B85C /* Assets.xcassets in Resources */,
+				EA5ACA581D98B6EA00E6B85C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		722AF4B8F9F4065476A2FAA6 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DLNAWrapper/Pods-DLNAWrapper-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8324E7E0DAF38FD9B15D06D3 /* Copy Pods Resources */ = {
+		217661C3CE2F2DD86AA4FC81 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -356,7 +358,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DLNAWrapper/Pods-DLNAWrapper-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CAE95C9D8316ECA9C3BA6D87 /* Check Pods Manifest.lock */ = {
+		D0F2B279C5F90DC27A997419 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -371,54 +373,70 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		D955FD86299B5BD8C2E7B488 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DLNAWrapper/Pods-DLNAWrapper-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		EA3A77E11D8F7CB900BD7A7C /* Sources */ = {
+		EA5ACA461D98B6EA00E6B85C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA3A782B1D8F7ECE00BD7A7C /* Seek.m in Sources */,
-				EA3A78311D8F7F1600BD7A7C /* GetVolume.m in Sources */,
-				EA3F90B91D923BA50002DF74 /* DeviceTableViewCell.m in Sources */,
-				EA3A78071D8F7D7600BD7A7C /* GCDAsyncUdpSocket.m in Sources */,
-				EA3A78031D8F7D4200BD7A7C /* MainViewController.m in Sources */,
-				EA3F90BC1D926D4F0002DF74 /* DMCViewController.m in Sources */,
-				EA4098DA1D912BED0047CEF1 /* ActionBase.m in Sources */,
-				EA3A78131D8F7DF300BD7A7C /* ControlPoint.m in Sources */,
-				EA3A78191D8F7E1E00BD7A7C /* MediaControlService.m in Sources */,
-				EA3A77ED1D8F7CB900BD7A7C /* AppDelegate.m in Sources */,
-				EA4098D61D9122780047CEF1 /* SetURI.m in Sources */,
-				EA3A78101D8F7DE000BD7A7C /* Device.m in Sources */,
-				EA3A78341D8F7F3700BD7A7C /* SetVolume.m in Sources */,
-				EA3A78161D8F7E0B00BD7A7C /* ControlService.m in Sources */,
-				EA3A77EA1D8F7CB900BD7A7C /* main.m in Sources */,
-				EA3A781C1D8F7E3200BD7A7C /* RenderingControlService.m in Sources */,
-				EA3A780A1D8F7DA100BD7A7C /* DLNAUpnpServer.m in Sources */,
-				EA3A78221D8F7E7C00BD7A7C /* Play.m in Sources */,
-				EA3A782E1D8F7EF000BD7A7C /* GetPositionInfo.m in Sources */,
-				EA3A78251D8F7E9500BD7A7C /* Pause.m in Sources */,
-				EA4098D31D9113D60047CEF1 /* DeviceListViewController.m in Sources */,
-				EA3C62271D94C8F0003F6CE6 /* ModelUtils.m in Sources */,
-				EA3A78281D8F7EAF00BD7A7C /* Stop.m in Sources */,
+				EA5ACAA41D98B72A00E6B85C /* SetVolume.m in Sources */,
+				EA5ACAAB1D98B72A00E6B85C /* DLNAUpnpServer.m in Sources */,
+				EA5ACAAF1D98B72A00E6B85C /* DeviceTableViewCell.m in Sources */,
+				EA5ACAA11D98B72A00E6B85C /* Play.m in Sources */,
+				EA5ACAAD1D98B72A00E6B85C /* GDataXMLNode.m in Sources */,
+				EA5ACAA51D98B72A00E6B85C /* Stop.m in Sources */,
+				EA5ACAAE1D98B72A00E6B85C /* ModelUtils.m in Sources */,
+				EA5ACAAA1D98B72A00E6B85C /* Device.m in Sources */,
+				EA5ACAA21D98B72A00E6B85C /* Seek.m in Sources */,
+				EA5ACAA81D98B72A00E6B85C /* MediaControlService.m in Sources */,
+				EA5ACAA61D98B72A00E6B85C /* ControlPoint.m in Sources */,
+				EA5ACAA01D98B72A00E6B85C /* Pause.m in Sources */,
+				EA5ACA9F1D98B72A00E6B85C /* GetVolume.m in Sources */,
+				EA5ACAAC1D98B72A00E6B85C /* GCDAsyncUdpSocket.m in Sources */,
+				EA5ACA9D1D98B72A00E6B85C /* ActionBase.m in Sources */,
+				EA5ACA9E1D98B72A00E6B85C /* GetPositionInfo.m in Sources */,
+				EA5ACA661D98B72400E6B85C /* AppDelegate.m in Sources */,
+				EA5ACA4F1D98B6EA00E6B85C /* main.m in Sources */,
+				EA5ACAB01D98B72A00E6B85C /* DeviceListViewController.m in Sources */,
+				EA5ACAB21D98B72A00E6B85C /* MainViewController.m in Sources */,
+				EA5ACAA31D98B72A00E6B85C /* SetURI.m in Sources */,
+				EA5ACAA91D98B72A00E6B85C /* RenderingControlService.m in Sources */,
+				EA5ACAB11D98B72A00E6B85C /* DMCViewController.m in Sources */,
+				EA5ACAA71D98B72A00E6B85C /* ControlService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		EA3A77F11D8F7CB900BD7A7C /* Main.storyboard */ = {
+		EA5ACA561D98B6EA00E6B85C /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				EA3A77F21D8F7CB900BD7A7C /* Base */,
+				EA5ACA571D98B6EA00E6B85C /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		EA3A77F61D8F7CB900BD7A7C /* LaunchScreen.storyboard */ = {
+		EA5ACA5B1D98B6EA00E6B85C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				EA3A77F71D8F7CB900BD7A7C /* Base */,
+				EA5ACA5C1D98B6EA00E6B85C /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -426,7 +444,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		EA3A77FA1D8F7CB900BD7A7C /* Debug */ = {
+		EA5ACA5F1D98B6EA00E6B85C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -470,7 +488,7 @@
 			};
 			name = Debug;
 		};
-		EA3A77FB1D8F7CB900BD7A7C /* Release */ = {
+		EA5ACA601D98B6EA00E6B85C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -508,11 +526,12 @@
 			};
 			name = Release;
 		};
-		EA3A77FD1D8F7CB900BD7A7C /* Debug */ = {
+		EA5ACA621D98B6EA00E6B85C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 16F81FCBB683FB03447208F2 /* Pods-DLNAWrapper.debug.xcconfig */;
+			baseConfigurationReference = F63A6BF622378B432ABE3D36 /* Pods-DLNAWrapper.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = DLNAWrapper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = moe.key.yao.DLNAWrapper;
@@ -520,11 +539,12 @@
 			};
 			name = Debug;
 		};
-		EA3A77FE1D8F7CB900BD7A7C /* Release */ = {
+		EA5ACA631D98B6EA00E6B85C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21C58E82F9D5A57AC26E0007 /* Pods-DLNAWrapper.release.xcconfig */;
+			baseConfigurationReference = 9BE4E0DA7F0D02901DBF2950 /* Pods-DLNAWrapper.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = DLNAWrapper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = moe.key.yao.DLNAWrapper;
@@ -535,25 +555,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		EA3A77E01D8F7CB900BD7A7C /* Build configuration list for PBXProject "DLNAWrapper" */ = {
+		EA5ACA451D98B6EA00E6B85C /* Build configuration list for PBXProject "DLNAWrapper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EA3A77FA1D8F7CB900BD7A7C /* Debug */,
-				EA3A77FB1D8F7CB900BD7A7C /* Release */,
+				EA5ACA5F1D98B6EA00E6B85C /* Debug */,
+				EA5ACA601D98B6EA00E6B85C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EA3A77FC1D8F7CB900BD7A7C /* Build configuration list for PBXNativeTarget "DLNAWrapper" */ = {
+		EA5ACA611D98B6EA00E6B85C /* Build configuration list for PBXNativeTarget "DLNAWrapper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EA3A77FD1D8F7CB900BD7A7C /* Debug */,
-				EA3A77FE1D8F7CB900BD7A7C /* Release */,
+				EA5ACA621D98B6EA00E6B85C /* Debug */,
+				EA5ACA631D98B6EA00E6B85C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = EA3A77DD1D8F7CB900BD7A7C /* Project object */;
+	rootObject = EA5ACA421D98B6EA00E6B85C /* Project object */;
 }

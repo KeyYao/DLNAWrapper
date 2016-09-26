@@ -51,19 +51,15 @@
 
 - (NSData *)postData
 {
-    DDXMLElement *setURIElement = [[DDXMLElement alloc] initWithName:@"u:SetAVTransportURI"];
+    GDataXMLElement *setURIElement = [GDataXMLElement elementWithName:@"u:SetAVTransportURI"];
     
-    NSMutableArray<DDXMLNode *> *setURIAttr = [[NSMutableArray alloc] init];
+    [setURIElement addAttribute:[GDataXMLNode attributeWithName:@"xmlns:u" stringValue:SERVICE_TYPE_AVTRANSPORT]];
     
-    [setURIAttr addObject:[DDXMLNode attributeWithName:@"xmlns:u" stringValue:SERVICE_TYPE_AVTRANSPORT]];
+    GDataXMLElement *instanceIDElement = [GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"];
     
-    setURIElement.attributes = setURIAttr;
+    GDataXMLElement *currentURIElement = [GDataXMLElement elementWithName:@"CurrentURI" stringValue:uri];
     
-    DDXMLElement *instanceIDElement = [[DDXMLElement alloc] initWithName:@"InstanceID" stringValue:@"0"];
-    
-    DDXMLElement *currentURIElement = [[DDXMLElement alloc] initWithName:@"CurrentURI" stringValue:uri];
-    
-    DDXMLElement *currentURIMetaDataElement = [[DDXMLElement alloc] initWithName:@"CurrentURIMetaData"];
+    GDataXMLElement *currentURIMetaDataElement = [GDataXMLElement elementWithName:@"CurrentURIMetaData"];
     
     [setURIElement addChild:instanceIDElement];
     

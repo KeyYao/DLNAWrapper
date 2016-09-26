@@ -45,15 +45,11 @@
 
 - (NSData *)postData
 {
-    DDXMLElement *stopElement = [[DDXMLElement alloc] initWithName:@"u:Stop"];
+    GDataXMLElement *stopElement = [GDataXMLElement elementWithName:@"u:Stop"];
     
-    NSMutableArray<DDXMLNode *> *stopAttr = [[NSMutableArray alloc] init];
+    [stopElement addAttribute:[GDataXMLNode attributeWithName:@"xmlns:u" stringValue:SERVICE_TYPE_AVTRANSPORT]];
     
-    [stopAttr addObject:[DDXMLNode attributeWithName:@"xmlns:u" stringValue:SERVICE_TYPE_AVTRANSPORT]];
-    
-    stopElement.attributes = stopAttr;
-    
-    DDXMLElement *instanceIDElement = [[DDXMLElement alloc] initWithName:@"InstanceID" stringValue:@"0"];
+    GDataXMLElement *instanceIDElement = [GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"];
     
     [stopElement addChild:instanceIDElement];
     

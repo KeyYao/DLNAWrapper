@@ -7,15 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "KissXML/KissXML.h"
+#import "GDataXMLNode.h"
 
 #define SERVICE_TYPE_AVTRANSPORT           @"urn:schemas-upnp-org:service:AVTransport:1"
 #define SERVICE_TYPE_RENDERING_CONTROL     @"urn:schemas-upnp-org:service:RenderingControl:1"
 
 @interface ActionBase : NSObject
 
-- (DDXMLElement *)rootElement;
+- (GDataXMLElement *)rootElement;
 
-- (NSData *)dataXML:(DDXMLElement *)body;
+- (NSData *)dataXML:(GDataXMLElement *)body;
 
 @end

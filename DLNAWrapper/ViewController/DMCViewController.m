@@ -325,6 +325,7 @@
 }
 
 - (void)back:(id)sender {
+    isUpdateProgress = NO;
     [self.navigationController popViewControllerAnimated:YES];
 }
 

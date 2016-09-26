@@ -51,19 +51,15 @@
 
 - (NSData *)postData
 {
-    DDXMLElement *setVolumeElement = [[DDXMLElement alloc] initWithName:@"u:SetVolume"];
+    GDataXMLElement *setVolumeElement = [GDataXMLElement elementWithName:@"u:SetVolume"];
     
-    NSMutableArray<DDXMLNode *> *setVolumeAttr = [[NSMutableArray alloc] init];
+    [setVolumeElement addAttribute:[GDataXMLNode attributeWithName:@"xmlns:u" stringValue:SERVICE_TYPE_RENDERING_CONTROL]];
     
-    [setVolumeAttr addObject:[DDXMLNode attributeWithName:@"xmlns:u" stringValue:@"urn:schemas-upnp-org:service:RenderingControl:1"]];
+    GDataXMLElement *instanceIDElement = [GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"];
     
-    setVolumeElement.attributes = setVolumeAttr;
+    GDataXMLElement *channelElement = [GDataXMLElement elementWithName:@"Channel" stringValue:@"Master"];
     
-    DDXMLElement *instanceIDElement = [[DDXMLElement alloc] initWithName:@"InstanceID" stringValue:@"0"];
-    
-    DDXMLElement *channelElement = [[DDXMLElement alloc] initWithName:@"Channel" stringValue:@"Master"];
-    
-    DDXMLElement *desiredVolumeElement = [[DDXMLElement alloc] initWithName:@"DesiredVolume" stringValue:[[NSNumber numberWithInteger:targetVolume] stringValue]];
+    GDataXMLElement *desiredVolumeElement = [GDataXMLElement elementWithName:@"DesiredVolume" stringValue:[[NSNumber numberWithInteger:targetVolume] stringValue]];
     
     [setVolumeElement addChild:instanceIDElement];
     
