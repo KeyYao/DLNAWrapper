@@ -10,8 +10,6 @@
 
 @interface DeviceListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property UITableView *deviceTable;
-
 @property (copy, nonatomic) void (^selectedDevice)(int index);
 
 @end

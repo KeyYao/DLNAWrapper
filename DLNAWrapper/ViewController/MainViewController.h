@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DeviceChangeDelegate.h"
 
-@interface MainViewController : UIViewController <UITextFieldDelegate, DeviceChangeDelegate>
+@interface MainViewController : UIViewController <DeviceChangeDelegate>
 
 
 @end

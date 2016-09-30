@@ -6,11 +6,12 @@
 //  Copyright © 2016年 Key. All rights reserved.
 //
 
+#import "DMCViewController.h"
+
 #import "Masonry.h"
 
-#import "DMCViewController.h"
-#import "AppDelegate.h"
-
+#import "ExampleDefine.h"
+#import "UIColor+ColorFormat.h"
 #import "DLNAUpnpServer.h"
 #import "Device.h"
 #import "ControlPoint.h"
@@ -23,8 +24,6 @@
 #import "GetPositionInfo.h"
 #import "GetVolume.h"
 #import "SetVolume.h"
-
-#define PLAY_URL @"http://192.168.1.9:8080/video/temp/Snow_halation.mp4"
 
 @interface DMCViewController ()
 
@@ -68,20 +67,19 @@
     // Do any additional setup after loading the view.
     
     self.isUpdateProgress = NO;
-//    self.url = PLAY_URL;
     
     self.view.backgroundColor = [UIColor whiteColor];
     NSInteger padding = 30;
     
     CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
     UIView *statusBarView = [[UIView alloc] initWithFrame:statusBarFrame];
-    statusBarView.backgroundColor = [AppDelegate getColor:@"3f51b5"];
+    statusBarView.backgroundColor = THEME_COLOR;
     [self.view addSubview:statusBarView];
     
     UILabel *topLabel = [[UILabel alloc] init];
     topLabel.text = @"DLNAController";
     topLabel.textColor = [UIColor whiteColor];
-    topLabel.backgroundColor = [AppDelegate getColor:@"3f51b5"];
+    topLabel.backgroundColor = THEME_COLOR;
     topLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:topLabel];
     
@@ -94,8 +92,8 @@
     
     progressView = [[UIProgressView alloc] init];
     progressView.progressViewStyle = UIProgressViewStyleDefault;
-    progressView.progressTintColor = [AppDelegate getColor:@"3f51b5"];
-    progressView.trackTintColor = [AppDelegate getColor:@"cccccc"];
+    progressView.progressTintColor = THEME_COLOR;
+    progressView.trackTintColor = [UIColor colorWithFormat:@"#cccccc"];
     [progressView setProgress:0.0f animated:NO];
     [self.view addSubview:progressView];
     
@@ -117,7 +115,7 @@
     [playBtn setContentEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     [playBtn setTitle:@"Play" forState:UIControlStateNormal];
     [playBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [playBtn setBackgroundColor:[AppDelegate getColor:@"3f51b5"]];
+    [playBtn setBackgroundColor:THEME_COLOR];
     [playBtn addTarget:self action:@selector(play:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:playBtn];
     
@@ -127,7 +125,7 @@
     [pauseBtn setContentEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     [pauseBtn setTitle:@"Pause" forState:UIControlStateNormal];
     [pauseBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [pauseBtn setBackgroundColor:[AppDelegate getColor:@"3f51b5"]];
+    [pauseBtn setBackgroundColor:THEME_COLOR];
     [pauseBtn addTarget:self action:@selector(pause:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:pauseBtn];
     
@@ -137,7 +135,7 @@
     [stopBtn setContentEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     [stopBtn setTitle:@"Stop" forState:UIControlStateNormal];
     [stopBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [stopBtn setBackgroundColor:[AppDelegate getColor:@"3f51b5"]];
+    [stopBtn setBackgroundColor:THEME_COLOR];
     [stopBtn addTarget:self action:@selector(stop:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:stopBtn];
     
@@ -147,7 +145,7 @@
     [upVolumeBtn setContentEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     [upVolumeBtn setTitle:@"+" forState:UIControlStateNormal];
     [upVolumeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [upVolumeBtn setBackgroundColor:[AppDelegate getColor:@"3f51b5"]];
+    [upVolumeBtn setBackgroundColor:THEME_COLOR];
     [upVolumeBtn addTarget:self action:@selector(volumeUp:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:upVolumeBtn];
     
@@ -157,7 +155,7 @@
     [downVolumeBtn setContentEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     [downVolumeBtn setTitle:@"-" forState:UIControlStateNormal];
     [downVolumeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [downVolumeBtn setBackgroundColor:[AppDelegate getColor:@"3f51b5"]];
+    [downVolumeBtn setBackgroundColor:THEME_COLOR];
     [downVolumeBtn addTarget:self action:@selector(volumeDown:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:downVolumeBtn];
     
@@ -167,7 +165,7 @@
     [seekBackBtn setContentEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     [seekBackBtn setTitle:@"<<" forState:UIControlStateNormal];
     [seekBackBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [seekBackBtn setBackgroundColor:[AppDelegate getColor:@"3f51b5"]];
+    [seekBackBtn setBackgroundColor:THEME_COLOR];
     [seekBackBtn addTarget:self action:@selector(seekBack:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:seekBackBtn];
     
@@ -177,7 +175,7 @@
     [seekForwardBtn setContentEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     [seekForwardBtn setTitle:@">>" forState:UIControlStateNormal];
     [seekForwardBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [seekForwardBtn setBackgroundColor:[AppDelegate getColor:@"3f51b5"]];
+    [seekForwardBtn setBackgroundColor:THEME_COLOR];
     [seekForwardBtn addTarget:self action:@selector(seekForward:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:seekForwardBtn];
     
@@ -283,7 +281,7 @@
         [self getVolume];
         [self play:nil];
     } failure:^(NSError *error) {
-        
+        NSLog(@"设置 URL 失败");
     }];
     
     [mediaCP executeAction:setUriAction];
@@ -318,7 +316,7 @@
     GetVolume *getVolumeAction = [GetVolume initWithSuccess:^(NSInteger volume) {
         self.currentVolume = volume;
     } failure:^(NSError *error) {
-        
+        NSLog(@"获取音量失败");
     }];
     
     [renderingCP executeAction:getVolumeAction];
@@ -333,7 +331,7 @@
     Play *playAction = [Play initWithSuccess:^{
         
     } failure:^(NSError *error) {
-        
+        NSLog(@"播放失败");
     }];
     
     [mediaCP executeAction:playAction];
@@ -343,7 +341,7 @@
     Pause *pauseAction = [Pause initWithSuccess:^{
         
     } failure:^(NSError *error) {
-        
+        NSLog(@"暂停失败");
     }];
     
     [mediaCP executeAction:pauseAction];
@@ -353,7 +351,7 @@
     Stop *stopAction = [Stop initWithSuccess:^{
         
     } failure:^(NSError *error) {
-        
+        NSLog(@"停止失败");
     }];
     
     [mediaCP executeAction:stopAction];
@@ -367,7 +365,7 @@
     Seek *seekAction = [Seek initWithTarget:[ModelUtils timeStringFromInteger:targetDuration] success:^{
         
     } failure:^(NSError *error) {
-        
+        NSLog(@"快进失败");
     }];
     
     [mediaCP executeAction:seekAction];
@@ -381,7 +379,7 @@
     Seek *seekAction = [Seek initWithTarget:[ModelUtils timeStringFromInteger:targetDuration] success:^{
         
     } failure:^(NSError *error) {
-        
+        NSLog(@"快退失败");
     }];
     
     [mediaCP executeAction:seekAction];
@@ -396,7 +394,7 @@
     SetVolume *upVolume = [SetVolume initWithVolume:targetVolume success:^{
         self.currentVolume = targetVolume;
     } failure:^(NSError *error) {
-        
+        NSLog(@"设置音量失败");
     }];
     
     [renderingCP executeAction:upVolume];
@@ -410,7 +408,7 @@
     SetVolume *downVolume = [SetVolume initWithVolume:targetVolume success:^{
         self.currentVolume = targetVolume;
     } failure:^(NSError *error) {
-        
+        NSLog(@"设置音量失败");
     }];
     
     [renderingCP executeAction:downVolume];

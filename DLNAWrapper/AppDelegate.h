@@ -12,8 +12,5 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-
-+ (UIColor *)getColor:(NSString *)color;
-
 @end
 

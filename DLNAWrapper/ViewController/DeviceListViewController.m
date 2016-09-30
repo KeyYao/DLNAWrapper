@@ -5,17 +5,21 @@
 //  Created by Key.Yao on 16/9/20.
 //  Copyright © 2016年 Key. All rights reserved.
 //
-#import "Masonry.h"
 
 #import "DeviceListViewController.h"
-#import "DeviceTableViewCell.h"
-#import "AppDelegate.h"
 
+#import "Masonry.h"
+
+#import "UIColor+ColorFormat.h"
+#import "ExampleDefine.h"
+#import "DeviceTableViewCell.h"
 #import "DLNAUpnpServer.h"
 
 #define DEVICE_CELL_ID @"DeviceCell"
 
 @interface DeviceListViewController ()
+
+@property UITableView *deviceTable;
 
 @end
 
@@ -30,13 +34,13 @@
     // Do any additional setup after loading the view.
     CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
     UIView *statusBarView = [[UIView alloc] initWithFrame:statusBarFrame];
-    statusBarView.backgroundColor = [AppDelegate getColor:@"3f51b5"];
+    statusBarView.backgroundColor = THEME_COLOR;
     [self.view addSubview:statusBarView];
     
     UILabel *topLabel = [[UILabel alloc] init];
     topLabel.text = @"选择设备";
     topLabel.textColor = [UIColor whiteColor];
-    topLabel.backgroundColor = [AppDelegate getColor:@"3f51b5"];
+    topLabel.backgroundColor = THEME_COLOR;
     topLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:topLabel];
     

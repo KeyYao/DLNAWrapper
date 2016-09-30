@@ -60,11 +60,11 @@
 
 - (void)start
 {
-    [udpSocket bindToPort:CLIENT_PROT error:nil];
+    [udpSocket bindToPort:UDP_CLIENT_PROT error:nil];
     
     [udpSocket beginReceiving:nil];
     
-    [udpSocket joinMulticastGroup:SERVER_HOST error:nil];
+    [udpSocket joinMulticastGroup:UDP_SERVER_HOST error:nil];
     
     [self search];
 }
@@ -79,7 +79,7 @@
         
     }
     
-    [udpSocket sendData:[SEARCH_DATA dataUsingEncoding:NSUTF8StringEncoding] toHost:SERVER_HOST port:SERVER_PROT withTimeout:-1 tag:1];
+    [udpSocket sendData:[SEARCH_DATA dataUsingEncoding:NSUTF8StringEncoding] toHost:UDP_SERVER_HOST port:UDP_SERVER_PROT withTimeout:-1 tag:1];
 }
 
 - (void)parserDeviceLocation:(NSString *)location
@@ -252,7 +252,7 @@
 
     if (IS_DEBUGING) {
         
-        NSLog(@"receiver data %@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        NSLog(@"receiver data %@", str);
         
     }
     
