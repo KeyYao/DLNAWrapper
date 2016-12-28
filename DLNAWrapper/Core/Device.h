@@ -12,12 +12,12 @@
 
 @interface Device : NSObject
 
-@property NSString *name;
+@property (nonatomic, strong) NSString                *name;
 
-@property NSString *location;
+@property (nonatomic, strong) NSString                *location;
 
-@property MediaControlService *mediaControlService;
+@property (nonatomic, strong) MediaControlService     *mediaControlService;
 
-@property RenderingControlService *renderingControlService;
+@property (nonatomic, strong) RenderingControlService *renderingControlService;
 
 @end

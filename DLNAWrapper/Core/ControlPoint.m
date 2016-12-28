@@ -8,19 +8,23 @@
 
 #import "ControlPoint.h"
 
-#define IS_SHOW_DEBUG_LOG YES
+@interface ControlPoint ()
+
+@property (nonatomic, strong) ControlService *service;
+
+@end
 
 @implementation ControlPoint
 
-@synthesize service;
+@synthesize service = _service;
 
-+ (instancetype)initWithService:(ControlService *)service
+- (instancetype)initWithService:(ControlService *)service
 {
-    ControlPoint *cp = [[ControlPoint alloc] init];
+    self = [self init];
     
-    cp.service = service;
+    self.service = service;
     
-    return cp;
+    return self;
 }
 
 -(void)executeAction:(id<ActionDelegate>)action
@@ -43,9 +47,9 @@
 
             if ([httpResponse statusCode] == 200) {
 
-                if (IS_SHOW_DEBUG_LOG) {
+                if (IS_DEBUGING) {
 
-                    NSLog(@"excecute \"%@\" action success, response data -- > %@", [action name], [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                    NSLog(@"===============>> excecute \"%@\" action success, response data -- > %@", [action name], [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
 
                 }
 
@@ -57,9 +61,9 @@
 
             } else {
 
-                if (IS_SHOW_DEBUG_LOG) {
+                if (IS_DEBUGING) {
 
-                    NSLog(@"excecute \"%@\" action error, response data -- > %@", [action name], [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                    NSLog(@"===============>> excecute \"%@\" action error, response data -- > %@", [action name], [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
 
                 }
 
@@ -72,9 +76,9 @@
             }
         } else {
 
-            if (IS_SHOW_DEBUG_LOG) {
+            if (IS_DEBUGING) {
 
-                NSLog(@"excecute \"%@\" action error, no response", [action name]);
+                NSLog(@"===============>> excecute \"%@\" action error, no response", [action name]);
                 
             }
             

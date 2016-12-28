@@ -10,33 +10,33 @@
 
 @interface Seek ()
 
-@property NSString *targetTime;
+@property (nonatomic, strong) NSString *targetTime;
 
-@property (copy, nonatomic) void(^successCallback)();
+@property (nonatomic, copy)   void(^successCallback)();
 
-@property (copy, nonatomic) void(^failureCallback)(NSError *error);
+@property (nonatomic, copy)   void(^failureCallback)(NSError *error);
 
 @end
 
 @implementation Seek
 
-@synthesize targetTime;
+@synthesize targetTime      = _targetTime;
 
-@synthesize successCallback;
+@synthesize successCallback = _successCallback;
 
-@synthesize failureCallback;
+@synthesize failureCallback = _failureCallback;
 
-+ (instancetype)initWithTarget:(NSString *)target success:(void (^)())successBlock failure:(void (^)(NSError *))failureBlock
+- (instancetype)initWithTarget:(NSString *)target success:(void (^)())successBlock failure:(void (^)(NSError *))failureBlock
 {
-    Seek *seek = [[Seek alloc] init];
+    self = [self init];
     
-    seek.targetTime = target;
+    self.targetTime = target;
     
-    seek.successCallback = successBlock;
+    self.successCallback = successBlock;
     
-    seek.failureCallback = failureBlock;
+    self.failureCallback = failureBlock;
     
-    return seek;
+    return self;
 }
 
 - (NSString *)name
@@ -59,7 +59,7 @@
     
     GDataXMLElement *unitElement = [GDataXMLElement elementWithName:@"Unit" stringValue:@"REL_TIME"];
     
-    GDataXMLElement *targetElement = [GDataXMLElement elementWithName:@"Target" stringValue:targetTime];
+    GDataXMLElement *targetElement = [GDataXMLElement elementWithName:@"Target" stringValue:self.targetTime];
     
     [seekElement addChild:instanceIDElement];
     
@@ -72,12 +72,12 @@
 
 - (void)success:(NSData *)data
 {
-    successCallback();
+    self.successCallback();
 }
 
 - (void)failure:(NSError *)error
 {
-    failureCallback(error);
+    self.failureCallback(error);
 }
 
 @end

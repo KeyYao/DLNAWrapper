@@ -10,33 +10,33 @@
 
 @interface SetURI ()
 
-@property NSString *uri;
+@property (nonatomic, strong) NSString *uri;
 
-@property (copy, nonatomic) void(^successCallback)();
+@property (nonatomic, copy)   void(^successCallback)();
 
-@property (copy, nonatomic) void(^failureCallback)(NSError *error);
+@property (nonatomic, copy)   void(^failureCallback)(NSError *error);
 
 @end
 
 @implementation SetURI
 
-@synthesize uri;
+@synthesize uri             = _uri;
 
-@synthesize successCallback;
+@synthesize successCallback = _successCallback;
 
-@synthesize failureCallback;
+@synthesize failureCallback = _failureCallback;
 
-+ (instancetype)initWithURI:(NSString *)uri success:(void(^)())successBlock failure:(void(^)(NSError *))failureBlock
+- (instancetype)initWithURI:(NSString *)uri success:(void(^)())successBlock failure:(void(^)(NSError *))failureBlock
 {
-    SetURI *setUri = [[SetURI alloc] init];
+    self = [self init];
     
-    setUri.uri = uri;
+    self.uri = uri;
     
-    setUri.successCallback = successBlock;
+    self.successCallback = successBlock;
     
-    setUri.failureCallback = failureBlock;
+    self.failureCallback = failureBlock;
     
-    return setUri;
+    return self;
 }
 
 - (NSString *)name
@@ -57,7 +57,7 @@
     
     GDataXMLElement *instanceIDElement = [GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"];
     
-    GDataXMLElement *currentURIElement = [GDataXMLElement elementWithName:@"CurrentURI" stringValue:uri];
+    GDataXMLElement *currentURIElement = [GDataXMLElement elementWithName:@"CurrentURI" stringValue:self.uri];
     
     GDataXMLElement *currentURIMetaDataElement = [GDataXMLElement elementWithName:@"CurrentURIMetaData"];
     
@@ -72,12 +72,12 @@
 
 - (void)success:(NSData *)data
 {
-    successCallback();
+    self.successCallback();
 }
 
 - (void)failure:(NSError *)error
 {
-    failureCallback(error);
+    self.failureCallback(error);
 }
 
 @end

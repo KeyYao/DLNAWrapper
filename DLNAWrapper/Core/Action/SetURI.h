@@ -12,6 +12,6 @@
 
 @interface SetURI : ActionBase <ActionDelegate>
 
-+ (instancetype)initWithURI:(NSString *)uri success:(void(^)())successBlock failure:(void(^)(NSError *error))failureBlock;
+- (instancetype)initWithURI:(NSString *)uri success:(void(^)())successBlock failure:(void(^)(NSError *error))failureBlock;
 
 @end

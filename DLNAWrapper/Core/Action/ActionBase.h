@@ -8,9 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GDataXMLNode.h"
-
-#define SERVICE_TYPE_AVTRANSPORT           @"urn:schemas-upnp-org:service:AVTransport:1"
-#define SERVICE_TYPE_RENDERING_CONTROL     @"urn:schemas-upnp-org:service:RenderingControl:1"
+#import "Config.h"
 
 @interface ActionBase : NSObject
 

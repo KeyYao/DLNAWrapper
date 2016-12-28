@@ -12,6 +12,6 @@
 
 @interface Seek : ActionBase <ActionDelegate>
 
-+ (instancetype)initWithTarget:(NSString *)target success:(void(^)())successBlock failure:(void(^)(NSError *error))failureBlock;
+- (instancetype)initWithTarget:(NSString *)target success:(void(^)())successBlock failure:(void(^)(NSError *error))failureBlock;
 
 @end

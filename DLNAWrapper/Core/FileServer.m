@@ -13,9 +13,15 @@
 #import "Config.h"
 #import "FileServer.h"
 
+@interface FileServer ()
+
+@property (nonatomic, strong) GCDWebServer *webServer;
+
+@end
+
 @implementation FileServer
 
-@synthesize webServer;
+@synthesize webServer = _webServer;
 
 + (instancetype)server
 {
@@ -40,7 +46,7 @@
         
         [GCDWebServer setLogLevel:IS_DEBUGING ? kGCDWebServerLoggingLevel_Debug : kGCDWebServerLoggingLevel_Error];
         
-        webServer = [[GCDWebServer alloc] init];
+        _webServer = [[GCDWebServer alloc] init];
         
     }
     
@@ -49,9 +55,9 @@
 
 - (void)start
 {
-    [webServer removeAllHandlers];
+    [_webServer removeAllHandlers];
     
-    [webServer addHandlerForMethod:@"GET" path:@"/image" requestClass:[GCDWebServerRequest class] asyncProcessBlock:^(__kindof GCDWebServerRequest *request, GCDWebServerCompletionBlock completionBlock) {
+    [_webServer addHandlerForMethod:@"GET" path:@"/image" requestClass:[GCDWebServerRequest class] asyncProcessBlock:^(__kindof GCDWebServerRequest *request, GCDWebServerCompletionBlock completionBlock) {
         
         NSString *url = request.URL.absoluteString;
         
@@ -59,22 +65,20 @@
         
         NSString *localId = [url substringFromIndex:(range.location + range.length)];
         
-        if (localId == nil || [localId isEqualToString:@""]) {
-            
+        if (localId == nil || [localId isEqualToString:@""])
+        {
             completionBlock([GCDWebServerResponse responseWithStatusCode:404]);
             
             return;
-            
         }
         
         PHAsset *asset = [PHAsset fetchAssetsWithLocalIdentifiers:@[localId] options:nil].firstObject;
         
-        if (asset == nil) {
-            
+        if (asset == nil)
+        {
             completionBlock([GCDWebServerResponse responseWithStatusCode:404]);
             
             return;
-            
         }
         
         PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
@@ -95,7 +99,7 @@
         
     }];
     
-    [webServer addHandlerForMethod:@"GET" path:@"/video" requestClass:[GCDWebServerRequest class] asyncProcessBlock:^(__kindof GCDWebServerRequest *request, GCDWebServerCompletionBlock completionBlock) {
+    [_webServer addHandlerForMethod:@"GET" path:@"/video" requestClass:[GCDWebServerRequest class] asyncProcessBlock:^(__kindof GCDWebServerRequest *request, GCDWebServerCompletionBlock completionBlock) {
         
         NSString *url = request.URL.absoluteString;
         
@@ -103,22 +107,20 @@
         
         NSString *localId = [url substringFromIndex:(range.location + range.length)];
         
-        if (localId == nil || [localId isEqualToString:@""]) {
-            
+        if (localId == nil || [localId isEqualToString:@""])
+        {
             completionBlock([GCDWebServerResponse responseWithStatusCode:404]);
             
             return;
-            
         }
         
         PHAsset *asset = [PHAsset fetchAssetsWithLocalIdentifiers:@[localId] options:nil].firstObject;
         
-        if (asset == nil) {
-            
+        if (asset == nil)
+        {
             completionBlock([GCDWebServerResponse responseWithStatusCode:404]);
             
             return;
-            
         }
         
         PHVideoRequestOptions *options = [[PHVideoRequestOptions alloc] init];
@@ -143,27 +145,26 @@
         
     }];
     
-    [webServer startWithPort:5438 bonjourName:nil];
+    [_webServer startWithPort:5438 bonjourName:nil];
 }
 
 - (void)stop
 {
-    [webServer stop];
+    [_webServer stop];
 }
 
 - (NSString *)getUrlFromAsset:(PHAsset *)asset
 {
-    if (asset.mediaType == PHAssetMediaTypeImage) {
-        
-        return [NSString stringWithFormat:@"%@%@%@", webServer.serverURL, @"image?", asset.localIdentifier];
-        
-    } else if (asset.mediaType == PHAssetMediaTypeVideo) {
-        
-        return [NSString stringWithFormat:@"%@%@%@", webServer.serverURL, @"video?", asset.localIdentifier];
-        
+    if (asset.mediaType == PHAssetMediaTypeImage)
+    {
+        return [NSString stringWithFormat:@"%@%@%@", _webServer.serverURL, @"image?", asset.localIdentifier];
+    }
+    else if (asset.mediaType == PHAssetMediaTypeVideo)
+    {
+        return [NSString stringWithFormat:@"%@%@%@", _webServer.serverURL, @"video?", asset.localIdentifier];
     }
     
-    return [webServer serverURL].absoluteString;
+    return [_webServer serverURL].absoluteString;
 }
 
 @end

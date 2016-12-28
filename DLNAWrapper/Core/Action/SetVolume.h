@@ -12,6 +12,6 @@
 
 @interface SetVolume : ActionBase <ActionDelegate>
 
-+ (instancetype)initWithVolume:(NSInteger)targetVolume success:(void(^)())successBlock failure:(void(^)(NSError *error))failureBlock;
+- (instancetype)initWithVolume:(NSInteger)targetVolume success:(void(^)())successBlock failure:(void(^)(NSError *error))failureBlock;
 
 @end

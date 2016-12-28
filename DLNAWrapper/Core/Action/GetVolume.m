@@ -10,27 +10,27 @@
 
 @interface GetVolume ()
 
-@property (copy, nonatomic) void(^successCallback)(NSInteger volume);
+@property (nonatomic, copy) void(^successCallback)(NSInteger volume);
 
-@property (copy, nonatomic) void(^failureCallback)(NSError *error);
+@property (nonatomic, copy) void(^failureCallback)(NSError *error);
 
 @end
 
 @implementation GetVolume
 
-@synthesize successCallback;
+@synthesize successCallback = _successCallback;
 
-@synthesize failureCallback;
+@synthesize failureCallback = _failureCallback;
 
-+ (instancetype)initWithSuccess:(void (^)(NSInteger))successBlock failure:(void (^)(NSError *))failureBlock
+- (instancetype)initWithSuccess:(void (^)(NSInteger))successBlock failure:(void (^)(NSError *))failureBlock
 {
-    GetVolume *getVolumne = [[GetVolume alloc] init];
+    self = [self init];
     
-    getVolumne.successCallback = successBlock;
+    self.successCallback = successBlock;
     
-    getVolumne.failureCallback = failureBlock;
+    self.failureCallback = failureBlock;
     
-    return getVolumne;
+    return self;
 }
 
 - (NSString *)name
@@ -70,12 +70,12 @@
     
     NSInteger currentVolume = [[[[getVolumeResponseElement elementsForName:@"CurrentVolume"] objectAtIndex:0] stringValue] integerValue];
     
-    successCallback(currentVolume);
+    self.successCallback(currentVolume);
 }
 
 - (void)failure:(NSError *)error
 {
-    failureCallback(error);
+    self.failureCallback(error);
 }
 
 @end

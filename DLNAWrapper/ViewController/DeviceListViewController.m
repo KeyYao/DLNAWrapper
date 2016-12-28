@@ -88,7 +88,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[[DLNAUpnpServer server] deviceArray] count];
+    return [[[DLNAUpnpServer server] getDeviceList] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -98,7 +98,7 @@
         cell = [[DeviceTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:DEVICE_CELL_ID];
     }
     
-    Device *device = [[[DLNAUpnpServer server] deviceArray] objectAtIndex:indexPath.row];
+    Device *device = [[[DLNAUpnpServer server] getDeviceList] objectAtIndex:indexPath.row];
     
     cell.titleLabel.text = device.name;
     

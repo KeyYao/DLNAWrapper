@@ -10,27 +10,27 @@
 
 @interface GetPositionInfo ()
 
-@property (copy, nonatomic) void(^successCallback)(NSString *currentDuration, NSString *totalDuration);
+@property (nonatomic, copy) void(^successCallback)(NSString *currentDuration, NSString *totalDuration);
 
-@property (copy, nonatomic) void(^failureCallback)(NSError *error);
+@property (nonatomic, copy) void(^failureCallback)(NSError *error);
 
 @end
 
 @implementation GetPositionInfo
 
-@synthesize successCallback;
+@synthesize successCallback = _successCallback;
 
-@synthesize failureCallback;
+@synthesize failureCallback = _failureCallback;
 
-+ (instancetype)initWithSuccess:(void (^)(NSString *, NSString *))successBlock failure:(void (^)(NSError *))failureBlock
+- (instancetype)initWithSuccess:(void (^)(NSString *, NSString *))successBlock failure:(void (^)(NSError *))failureBlock
 {
-    GetPositionInfo *getPositionInfo = [[GetPositionInfo alloc] init];
+    self = [self init];
     
-    getPositionInfo.successCallback = successBlock;
+    self.successCallback = successBlock;
     
-    getPositionInfo.failureCallback = failureBlock;
+    self.failureCallback = failureBlock;
     
-    return getPositionInfo;
+    return self;
 }
 
 - (NSString *)name
@@ -69,12 +69,12 @@
     
     NSString *currentDuration = [[[getPositionInfoResponseElement elementsForName:@"RelTime"] objectAtIndex:0] stringValue];
     
-    successCallback(currentDuration, totalDuration);
+    self.successCallback(currentDuration, totalDuration);
 }
 
 - (void)failure:(NSError *)error
 {
-    failureCallback(error);
+    self.failureCallback(error);
 }
 
 @end

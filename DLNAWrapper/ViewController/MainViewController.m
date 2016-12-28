@@ -247,7 +247,7 @@
     DeviceListViewController *deviceVC = [[DeviceListViewController alloc] init];
     deviceVC.selectedDevice = ^(int index) {
         self.deviceIndex = index;
-        NSString *name = [[[[DLNAUpnpServer server] deviceArray] objectAtIndex:index] name];
+        NSString *name = [[[[DLNAUpnpServer server] getDeviceList] objectAtIndex:index] name];
         NSLog(@"device name -- > %@", name);
         deviceName.text = name;
     };
@@ -301,7 +301,7 @@
 }
 
 - (void)onChange {
-    int count = (int)[[[DLNAUpnpServer server] deviceArray] count];
+    int count = (int)[[[DLNAUpnpServer server] getDeviceList] count];
     deviceCountLabel.text = [[NSString alloc] initWithFormat:@"已发现设备数量：%d", count];
 }
 

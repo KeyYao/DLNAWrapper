@@ -258,14 +258,14 @@
         make.width.equalTo(seekBackBtn);
     }];
     
-    device = [[[DLNAUpnpServer server] deviceArray] objectAtIndex:deviceIndex];
+    device = [[[DLNAUpnpServer server] getDeviceList] objectAtIndex:deviceIndex];
     
-    mediaCP = [ControlPoint initWithService:device.mediaControlService];
-    renderingCP = [ControlPoint initWithService:device.renderingControlService];
+    mediaCP = [[ControlPoint alloc] initWithService:device.mediaControlService];
+    renderingCP = [[ControlPoint alloc] initWithService:device.renderingControlService];
     
     
     // 流程: 停止 -> 设置uri -> 获取进度和音量 -> 播放 -> 更新进度
-    Stop *stopAction = [Stop initWithSuccess:^{
+    Stop *stopAction = [[Stop alloc] initWithSuccess:^{
         [self setUri];
     } failure:^(NSError *error) {
         
@@ -275,7 +275,7 @@
 }
 
 - (void)setUri {
-    SetURI *setUriAction = [SetURI initWithURI:url success:^{
+    SetURI *setUriAction = [[SetURI alloc] initWithURI:url success:^{
         isUpdateProgress = YES;
         [self getPositionInfo];
         [self getVolume];
@@ -288,7 +288,7 @@
 }
 
 - (void)getPositionInfo {
-    GetPositionInfo *getPosInfoAction = [GetPositionInfo initWithSuccess:^(NSString *currentDuration, NSString *totalDuration) {
+    GetPositionInfo *getPosInfoAction = [[GetPositionInfo alloc] initWithSuccess:^(NSString *currentDuration, NSString *totalDuration) {
         currentTimeLabel.text = currentDuration;
         totalTimeLabel.text = totalDuration;
         
@@ -313,7 +313,7 @@
 }
 
 - (void)getVolume {
-    GetVolume *getVolumeAction = [GetVolume initWithSuccess:^(NSInteger volume) {
+    GetVolume *getVolumeAction = [[GetVolume alloc] initWithSuccess:^(NSInteger volume) {
         self.currentVolume = volume;
     } failure:^(NSError *error) {
         NSLog(@"获取音量失败");
@@ -328,7 +328,7 @@
 }
 
 - (void)play:(id)sender {
-    Play *playAction = [Play initWithSuccess:^{
+    Play *playAction = [[Play alloc] initWithSuccess:^{
         
     } failure:^(NSError *error) {
         NSLog(@"播放失败");
@@ -338,7 +338,7 @@
 }
 
 - (void)pause:(id)sender {
-    Pause *pauseAction = [Pause initWithSuccess:^{
+    Pause *pauseAction = [[Pause alloc] initWithSuccess:^{
         
     } failure:^(NSError *error) {
         NSLog(@"暂停失败");
@@ -348,7 +348,7 @@
 }
 
 - (void)stop:(id)sender {
-    Stop *stopAction = [Stop initWithSuccess:^{
+    Stop *stopAction = [[Stop alloc] initWithSuccess:^{
         
     } failure:^(NSError *error) {
         NSLog(@"停止失败");
@@ -362,7 +362,7 @@
     if (targetDuration > totalTime) {
         targetDuration = totalTime;
     }
-    Seek *seekAction = [Seek initWithTarget:[ModelUtils timeStringFromInteger:targetDuration] success:^{
+    Seek *seekAction = [[Seek alloc] initWithTarget:[ModelUtils timeStringFromInteger:targetDuration] success:^{
         
     } failure:^(NSError *error) {
         NSLog(@"快进失败");
@@ -376,7 +376,7 @@
     if (targetDuration < 0) {
         targetDuration = 0;
     }
-    Seek *seekAction = [Seek initWithTarget:[ModelUtils timeStringFromInteger:targetDuration] success:^{
+    Seek *seekAction = [[Seek alloc] initWithTarget:[ModelUtils timeStringFromInteger:targetDuration] success:^{
         
     } failure:^(NSError *error) {
         NSLog(@"快退失败");
@@ -391,7 +391,7 @@
         targetVolume = 100;
     }
     NSLog(@"current volume: %ld, target volume: %ld", (long)currentVolume, (long)targetVolume);
-    SetVolume *upVolume = [SetVolume initWithVolume:targetVolume success:^{
+    SetVolume *upVolume = [[SetVolume alloc] initWithVolume:targetVolume success:^{
         self.currentVolume = targetVolume;
     } failure:^(NSError *error) {
         NSLog(@"设置音量失败");
@@ -405,7 +405,7 @@
     if (targetVolume < 0) {
         targetVolume = 0;
     }
-    SetVolume *downVolume = [SetVolume initWithVolume:targetVolume success:^{
+    SetVolume *downVolume = [[SetVolume alloc] initWithVolume:targetVolume success:^{
         self.currentVolume = targetVolume;
     } failure:^(NSError *error) {
         NSLog(@"设置音量失败");

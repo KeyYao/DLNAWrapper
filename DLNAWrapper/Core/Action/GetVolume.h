@@ -12,6 +12,6 @@
 
 @interface GetVolume : ActionBase <ActionDelegate>
 
-+ (instancetype)initWithSuccess:(void(^)(NSInteger volume))successBlock failure:(void(^)(NSError *error))failureBlock;
+- (instancetype)initWithSuccess:(void(^)(NSInteger volume))successBlock failure:(void(^)(NSError *error))failureBlock;
 
 @end

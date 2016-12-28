@@ -12,6 +12,6 @@
 
 @interface Pause : ActionBase <ActionDelegate>
 
-+ (instancetype)initWithSuccess:(void(^)())successBlock failure:(void(^)(NSError *error))failureBlock;
+- (instancetype)initWithSuccess:(void(^)())successBlock failure:(void(^)(NSError *error))failureBlock;
 
 @end

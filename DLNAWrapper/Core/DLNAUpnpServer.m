@@ -15,17 +15,23 @@
 
 @interface DLNAUpnpServer ()
 
-@property GCDAsyncUdpSocket *udpSocket;
+@property (nonatomic, strong) GCDAsyncUdpSocket                         *udpSocket;
+
+@property (nonatomic, strong) NSMutableDictionary<NSString *, Device *> *deviceDic; // key: location string,  value: device
+
+#if OS_OBJECT_USE_OBJC
+@property (nonatomic, strong) dispatch_queue_t                          queue;
+#else
+@property (nonatomic, assign) dispatch_queue_t                          queue;
+#endif
 
 @end
 
 @implementation DLNAUpnpServer
 
-@synthesize delegate;
+@synthesize delegate  = _delegate;
 
-@synthesize udpSocket;
-
-@synthesize deviceArray;
+@synthesize deviceDic = _deviceDic;
 
 
 + (instancetype)server
@@ -49,41 +55,67 @@
     
     if (self) {
         
-        udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+        _queue = dispatch_queue_create("moe.key.yao.dlna", DISPATCH_QUEUE_PRIORITY_DEFAULT);
         
-        deviceArray = [[NSMutableArray alloc] init];
+        _udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+        
+        _deviceDic = [[NSMutableDictionary alloc] init];
         
     }
     
     return self;
 }
 
+- (void)dealloc
+{
+#if !OS_OBJECT_USE_OBJC
+    dispatch_release(_queue);
+#endif
+}
+
 - (void)start
 {
-    [udpSocket bindToPort:UDP_CLIENT_PROT error:nil];
+    [_udpSocket bindToPort:UDP_CLIENT_PROT error:nil];
     
-    [udpSocket beginReceiving:nil];
+    [_udpSocket beginReceiving:nil];
     
-    [udpSocket joinMulticastGroup:UDP_SERVER_HOST error:nil];
+    [_udpSocket joinMulticastGroup:UDP_SERVER_HOST error:nil];
     
     [self search];
+    
 }
 
 - (void)search
 {
-    [self.deviceArray removeAllObjects];
-    
-    if (self.delegate != nil) {
-        
-        [delegate onChange];
-        
+    if (self.delegate)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.delegate onChange];
+            
+        });
     }
     
-    [udpSocket sendData:[SEARCH_DATA dataUsingEncoding:NSUTF8StringEncoding] toHost:UDP_SERVER_HOST port:UDP_SERVER_PROT withTimeout:-1 tag:1];
+    [_udpSocket sendData:[SEARCH_DATA dataUsingEncoding:NSUTF8StringEncoding] toHost:UDP_SERVER_HOST port:UDP_SERVER_PROT withTimeout:-1 tag:1];
 }
 
-- (void)parserDeviceLocation:(NSString *)location
+- (NSArray *)getDeviceList
 {
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    if (self.deviceDic)
+    {
+        [array addObjectsFromArray:self.deviceDic.allValues];
+    }
+    return array;
+}
+
+#pragma mark - private method
+- (Device *)parserDeviceLocation:(NSString *)location
+{
+    dispatch_semaphore_t seamphore = dispatch_semaphore_create(0);
+    
+    __block Device *device = nil;
+    
     NSRange protocolRange = [location rangeOfString:@"http://" options:NSCaseInsensitiveSearch];
     
     NSString *locationWithoutProtocolStr = [location substringFromIndex:protocolRange.length];
@@ -104,7 +136,7 @@
             
             if ([httpResponse statusCode] == 200) {
                 
-                Device *device = [[Device alloc] init];
+                device = [[Device alloc] init];
                 
                 device.location = location;
                 
@@ -207,39 +239,73 @@
                     }
                 }
                 
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    [self addDevice:device];
-                    
-                });
+                dispatch_semaphore_signal(seamphore);
                 
             }
         }
         
     }] resume];
     
+    dispatch_semaphore_wait(seamphore, DISPATCH_TIME_FOREVER);
+    
+    return device;
 }
 
-- (void)addDevice:(Device *)device
+- (void)addDevice:(Device *)device forLocation:(NSString *)location
 {
-    if (![deviceArray containsObject:device]) {
+    NSLog(@"===============>> add device : %@", location);
+    
+    [self.deviceDic setObject:device forKey:location];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
         
-        if (IS_DEBUGING) {
-            
-            NSLog(@"device -- > %@", device);
-            
+        if (self.delegate)
+        {
+            [self.delegate onChange];
         }
         
-        [deviceArray addObject:device];
-        
-        if (self.delegate != nil) {
-            
-            [delegate onChange];
-            
-        }
-    }
+    });
 }
 
+- (void)removeDeviceFromLocation:(NSString *)location
+{
+    NSLog(@"===============>> remove device : %@", location);
+    
+    [self.deviceDic removeObjectForKey:location];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        if (self.delegate)
+        {
+            [self.delegate onChange];
+        }
+        
+    });
+    
+}
+
+
+- (NSString *)headerValueForKey:(NSString *)key inData:(NSString *)data
+{
+    NSString *str = [NSString stringWithFormat:@"%@", data];
+    
+    NSRange keyRange = [str rangeOfString:key options:NSCaseInsensitiveSearch];
+    
+    if (keyRange.location == NSNotFound)
+    {
+        return @"";
+    }
+    
+    str = [str substringFromIndex:keyRange.location + keyRange.length];
+    
+    NSRange enterRange = [str rangeOfString:@"\r\n"];
+    
+    NSString *value = [[str substringToIndex:enterRange.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    return value;
+}
+
+#pragma mark - GCDAsyncUdpSocketDelegate method
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data fromAddress:(NSData *)address withFilterContext:(id)filterContext
 {
 //    NSString *host;
@@ -249,26 +315,75 @@
 //    [GCDAsyncUdpSocket getHost:&host port:&port fromAddress:address];
     
     NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-
-    if (IS_DEBUGING) {
+    
+    if ([str hasPrefix:@"NOTIFY"])
+    {
+        // from notify data
+        NSString *serviceType = [self headerValueForKey:@"NT:" inData:str];
         
-        NSLog(@"receiver data %@", str);
+        if ([serviceType isEqualToString:SERVICE_TYPE_AVTRANSPORT])
+        {
+            NSString *ssdp = [self headerValueForKey:@"NTS:" inData:str];
+            
+            NSString *location = [self headerValueForKey:@"Location:" inData:str];
+            
+            if (IS_DEBUGING)
+            {
+                NSLog(@"===============>> notify data %@\nssdp %@, location %@", str, ssdp, location);
+            }
+            
+            if ([location isEqualToString:@""])
+            {
+                return;
+            }
+            
+            
+            if ([ssdp isEqualToString:@"ssdp:alive"])
+            {
+                dispatch_async(_queue, ^{
+                    
+                    if ([self.deviceDic objectForKey:location] == nil)
+                    {
+                        [self addDevice:[self parserDeviceLocation:location] forLocation:location];
+                    }
+                    
+                });
+            }
+            else if ([ssdp isEqualToString:@"ssdp:byebye"])
+            {
+                dispatch_async(_queue, ^{
+                    
+                    [self removeDeviceFromLocation:location];
+                    
+                });
+            }
+        }
+        
+    }
+    else if ([str hasPrefix:@"HTTP/1.1 200 OK"])
+    {
+        // from search response data
+        NSString *location = [self headerValueForKey:@"Location:" inData:str];
+        
+        if (IS_DEBUGING)
+        {
+            NSLog(@"===============>> search response data %@", str);
+        }
+        
+        if (![location isEqualToString:@""])
+        {
+            dispatch_async(_queue, ^{
+                
+                if ([self.deviceDic objectForKey:location] == nil)
+                {
+                    [self addDevice:[self parserDeviceLocation:location] forLocation:location];
+                }
+                
+            });
+        }
         
     }
     
-    NSRange locationRange = [str rangeOfString:@"Location:" options:NSCaseInsensitiveSearch];
-    
-    if (locationRange.location == NSNotFound) {
-        return;
-    }
-    
-    str = [str substringFromIndex:locationRange.location + locationRange.length];
-    
-    NSRange enterRange = [str rangeOfString:@"\r\n"];
-    
-    NSString *location = [[str substringToIndex:enterRange.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    
-    [self parserDeviceLocation:location];
 }
 
 

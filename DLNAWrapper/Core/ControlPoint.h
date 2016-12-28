@@ -9,12 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "ControlService.h"
 #import "ActionDelegate.h"
+#import "Config.h"
 
 @interface ControlPoint : NSObject
 
-@property ControlService *service;
-
-+ (instancetype)initWithService:(ControlService *)service;
+- (instancetype)initWithService:(ControlService *)service;
 
 - (void)executeAction:(id<ActionDelegate>)action;
 

@@ -13,7 +13,7 @@
 
 #define IS_DEBUGING                        YES
 
-#define UDP_CLIENT_PROT                    12450
+#define UDP_CLIENT_PROT                    1900
 
 #define UDP_SERVER_HOST                    @"239.255.255.250"
 
@@ -27,7 +27,9 @@
 
 #define RENDERING_CONTROL_SERVICE_ID       @"urn:upnp-org:serviceId:RenderingControl"
 
+#define SERVICE_TYPE_AVTRANSPORT           @"urn:schemas-upnp-org:service:AVTransport:1"
 
+#define SERVICE_TYPE_RENDERING_CONTROL     @"urn:schemas-upnp-org:service:RenderingControl:1"
 
 
 #endif /* Config_h */

@@ -10,13 +10,13 @@
 
 @implementation Device
 
-@synthesize name;
+@synthesize name                    = _name;
 
-@synthesize location;
+@synthesize location                = _location;
 
-@synthesize mediaControlService;
+@synthesize mediaControlService     = _mediaControlService;
 
-@synthesize renderingControlService;
+@synthesize renderingControlService = _renderingControlService;
 
 - (BOOL)isEqual:(id)other
 {
@@ -36,12 +36,12 @@
 
 - (NSUInteger)hash
 {
-    return [location hash];
+    return [self.location hash];
 }
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"name: %@\nlocation: %@\nmediaControl: %@\nrenderingControl: %@", name, location, mediaControlService, renderingControlService];
+    return [NSString stringWithFormat:@"name: %@\nlocation: %@\nmediaControl: %@\nrenderingControl: %@", self.name, self.location, self.mediaControlService, self.renderingControlService];
 }
 
 @end

@@ -15,13 +15,12 @@
 
 @property (nonatomic, weak) id<DeviceChangeDelegate> delegate;
 
-@property NSMutableArray<Device *> *deviceArray;
-
-
 + (instancetype)server;
 
 - (void)start;
 
 - (void)search;
+
+- (NSArray *)getDeviceList;
 
 @end

@@ -10,33 +10,33 @@
 
 @interface SetVolume ()
 
-@property NSInteger targetVolume;
+@property (nonatomic, assign) NSInteger targetVolume;
 
-@property (copy, nonatomic) void(^successCallback)();
+@property (nonatomic, copy)   void(^successCallback)();
 
-@property (copy, nonatomic) void(^failureCallback)(NSError *error);
+@property (nonatomic, copy)   void(^failureCallback)(NSError *error);
 
 @end
 
 @implementation SetVolume
 
-@synthesize targetVolume;
+@synthesize targetVolume    = _targetVolume;
 
-@synthesize successCallback;
+@synthesize successCallback = _successCallback;
 
-@synthesize failureCallback;
+@synthesize failureCallback = _failureCallback;
 
-+ (instancetype)initWithVolume:(NSInteger)targetVolume success:(void (^)())successBlock failure:(void (^)(NSError *))failureBlock
+- (instancetype)initWithVolume:(NSInteger)targetVolume success:(void (^)())successBlock failure:(void (^)(NSError *))failureBlock
 {
-    SetVolume *setVolume = [[SetVolume alloc] init];
+    self = [self init];
     
-    setVolume.targetVolume = targetVolume;
+    self.targetVolume = targetVolume;
     
-    setVolume.successCallback = successBlock;
+    self.successCallback = successBlock;
     
-    setVolume.failureCallback = failureBlock;
+    self.failureCallback = failureBlock;
     
-    return setVolume;
+    return self;
 }
 
 - (NSString *)name
@@ -59,7 +59,7 @@
     
     GDataXMLElement *channelElement = [GDataXMLElement elementWithName:@"Channel" stringValue:@"Master"];
     
-    GDataXMLElement *desiredVolumeElement = [GDataXMLElement elementWithName:@"DesiredVolume" stringValue:[[NSNumber numberWithInteger:targetVolume] stringValue]];
+    GDataXMLElement *desiredVolumeElement = [GDataXMLElement elementWithName:@"DesiredVolume" stringValue:[[NSNumber numberWithInteger:self.targetVolume] stringValue]];
     
     [setVolumeElement addChild:instanceIDElement];
     
@@ -72,12 +72,12 @@
 
 - (void)success:(NSData *)data
 {
-    successCallback();
+    self.successCallback();
 }
 
 - (void)failure:(NSError *)error
 {
-    failureCallback(error);
+    self.failureCallback(error);
 }
 
 @end

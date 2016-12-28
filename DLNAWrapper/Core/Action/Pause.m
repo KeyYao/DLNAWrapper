@@ -10,27 +10,27 @@
 
 @interface Pause ()
 
-@property (copy, nonatomic) void(^successCallback)();
+@property (nonatomic, copy) void(^successCallback)();
 
-@property (copy, nonatomic) void(^failureCallback)(NSError *error);
+@property (nonatomic, copy) void(^failureCallback)(NSError *error);
 
 @end
 
 @implementation Pause
 
-@synthesize successCallback;
+@synthesize successCallback = _successCallback;
 
-@synthesize failureCallback;
+@synthesize failureCallback = _failureCallback;
 
-+ (instancetype)initWithSuccess:(void (^)())successBlock failure:(void (^)(NSError *))failureBlock
+- (instancetype)initWithSuccess:(void (^)())successBlock failure:(void (^)(NSError *))failureBlock
 {
-    Pause *pause = [[Pause alloc] init];
+    self = [self init];
     
-    pause.successCallback = successBlock;
+    self.successCallback = successBlock;
     
-    pause.failureCallback = failureBlock;
+    self.failureCallback = failureBlock;
     
-    return pause;
+    return self;
 }
 
 - (NSString *)name
@@ -58,12 +58,12 @@
 
 - (void)success:(NSData *)data
 {
-    successCallback();
+    self.successCallback();
 }
 
 - (void)failure:(NSError *)error
 {
-    failureCallback(error);
+    self.failureCallback(error);
 }
 
 @end

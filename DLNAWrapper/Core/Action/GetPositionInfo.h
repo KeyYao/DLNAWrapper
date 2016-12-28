@@ -12,6 +12,6 @@
 
 @interface GetPositionInfo : ActionBase <ActionDelegate>
 
-+ (instancetype)initWithSuccess:(void(^)(NSString *currentDuration, NSString *totalDuration))successBlock failure:(void(^)(NSError *error))failureBlock;
+- (instancetype)initWithSuccess:(void(^)(NSString *currentDuration, NSString *totalDuration))successBlock failure:(void(^)(NSError *error))failureBlock;
 
 @end

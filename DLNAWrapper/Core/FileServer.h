@@ -13,8 +13,6 @@
 
 @interface FileServer : NSObject
 
-@property GCDWebServer *webServer;
-
 + (instancetype)server;
 
 - (void)start;

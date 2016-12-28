@@ -10,27 +10,27 @@
 
 @interface Stop ()
 
-@property (copy, nonatomic) void(^successCallback)();
+@property (nonatomic, copy) void(^successCallback)();
 
-@property (copy, nonatomic) void(^failureCallback)(NSError *error);
+@property (nonatomic, copy) void(^failureCallback)(NSError *error);
 
 @end
 
 @implementation Stop
 
-@synthesize successCallback;
+@synthesize successCallback = _successCallback;
 
-@synthesize failureCallback;
+@synthesize failureCallback = _failureCallback;
 
-+ (instancetype)initWithSuccess:(void (^)())successBlock failure:(void (^)(NSError *))failureBlock
+- (instancetype)initWithSuccess:(void (^)())successBlock failure:(void (^)(NSError *))failureBlock
 {
-    Stop *stop = [[Stop alloc] init];
+    self = [self init];
     
-    stop.successCallback = successBlock;
+    self.successCallback = successBlock;
     
-    stop.failureCallback = failureBlock;
+    self.failureCallback = failureBlock;
     
-    return stop;
+    return self;
 }
 
 - (NSString *)name
@@ -58,12 +58,12 @@
 
 - (void)success:(NSData *)data
 {
-    successCallback();
+    self.successCallback();
 }
 
 - (void)failure:(NSError *)error
 {
-    failureCallback(error);
+    self.failureCallback(error);
 }
 
 @end
