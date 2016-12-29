@@ -76,6 +76,7 @@
 #if !OS_OBJECT_USE_OBJC
     dispatch_release(_queue);
 #endif
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
 }
 
 - (void)start
