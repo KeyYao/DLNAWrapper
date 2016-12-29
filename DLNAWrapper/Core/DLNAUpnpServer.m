@@ -8,6 +8,7 @@
 
 #import "DLNAUpnpServer.h"
 #import "GDataXMLNode.h"
+#import "Reachability.h"
 
 #import "Config.h"
 #import "MediaControlService.h"
@@ -19,6 +20,8 @@
 
 @property (nonatomic, strong) NSMutableDictionary<NSString *, Device *> *deviceDic; // key: location string,  value: device
 
+@property (nonatomic, strong) Reachability                              *reachability;
+
 #if OS_OBJECT_USE_OBJC
 @property (nonatomic, strong) dispatch_queue_t                          queue;
 #else
@@ -29,9 +32,11 @@
 
 @implementation DLNAUpnpServer
 
-@synthesize delegate  = _delegate;
+@synthesize delegate     = _delegate;
 
-@synthesize deviceDic = _deviceDic;
+@synthesize deviceDic    = _deviceDic;
+
+@synthesize reachability = _reachability;
 
 
 + (instancetype)server
@@ -81,8 +86,17 @@
     
     [_udpSocket joinMulticastGroup:UDP_SERVER_HOST error:nil];
     
-    [self search];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNetworkStatusChange:) name:kReachabilityChangedNotification object:nil];
     
+    self.reachability = [Reachability reachabilityForInternetConnection];
+    
+    [self.reachability startNotifier];
+    
+    if ([self.reachability currentReachabilityStatus] == ReachableViaWiFi)
+    {
+        // 当前网络是wifi下, 则主动搜索设备, 非wifi则不主动搜索
+        [self search];
+    }
 }
 
 - (void)search
@@ -90,6 +104,9 @@
     if (self.delegate)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
+            
+            // 搜索前先清空设备列表, 防止局域网改变时旧的设备还残留
+            [self.deviceDic removeAllObjects];
             
             [self.delegate onChange];
             
@@ -124,7 +141,7 @@
     
     NSString *address = [[NSString alloc] initWithFormat:@"http://%@", [locationWithoutProtocolStr substringToIndex:addressRange.location]];
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:location]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:location] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.0];
     
     request.HTTPMethod = @"GET";
     
@@ -239,10 +256,10 @@
                     }
                 }
                 
-                dispatch_semaphore_signal(seamphore);
-                
             }
         }
+        
+        dispatch_semaphore_signal(seamphore);
         
     }] resume];
     
@@ -253,7 +270,15 @@
 
 - (void)addDevice:(Device *)device forLocation:(NSString *)location
 {
-    NSLog(@"===============>> add device : %@", location);
+    if (!device)
+    {
+        return;
+    }
+    
+    if (IS_DEBUGING)
+    {
+        NSLog(@"===============>> add device : %@", location);
+    }
     
     [self.deviceDic setObject:device forKey:location];
     
@@ -269,7 +294,10 @@
 
 - (void)removeDeviceFromLocation:(NSString *)location
 {
-    NSLog(@"===============>> remove device : %@", location);
+    if (IS_DEBUGING)
+    {
+        NSLog(@"===============>> remove device : %@", location);
+    }
     
     [self.deviceDic removeObjectForKey:location];
     
@@ -303,6 +331,20 @@
     NSString *value = [[str substringToIndex:enterRange.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     return value;
+}
+
+#pragma mark - network status change
+- (void)onNetworkStatusChange:(NSNotification *)notification
+{
+    Reachability *currentReachability = [notification object];
+    
+    NetworkStatus status = [currentReachability currentReachabilityStatus];
+    
+    if (status == ReachableViaWiFi)
+    {
+        // 连接上wifi, 马上搜索设备
+        [self search];
+    }
 }
 
 #pragma mark - GCDAsyncUdpSocketDelegate method
