@@ -60,7 +60,7 @@
     
     if (self) {
         
-        _queue = dispatch_queue_create("moe.key.yao.dlna", DISPATCH_QUEUE_PRIORITY_DEFAULT);
+        _queue = dispatch_queue_create("moe.key.yao.dlna", DISPATCH_QUEUE_SERIAL);
         
         _udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
         
