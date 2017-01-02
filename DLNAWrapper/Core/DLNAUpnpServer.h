@@ -15,12 +15,40 @@
 
 @property (nonatomic, weak) id<DeviceChangeDelegate> delegate;
 
-+ (instancetype)server;
 
+/**
+ 获取实例
+
+ @return DLNAUpnpServer instance
+ */
++ (instancetype)shareServer;
+
+
+/**
+ 启动Upnp服务，默认不搜索设备
+ */
 - (void)start;
 
+
+/**
+ 启动Upnp服务
+
+ @param isSearch 是否立刻搜索设备
+ */
+- (void)startAndSearch:(BOOL)isSearch;
+
+
+/**
+ 搜索局域网内的设备
+ */
 - (void)search;
 
-- (NSArray *)getDeviceList;
+
+/**
+ 获取已经发现的设备
+
+ @return DMR Array
+ */
+- (NSArray<Device *> *)getDeviceList;
 
 @end

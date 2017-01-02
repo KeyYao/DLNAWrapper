@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Key. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "DLNAUpnpServer.h"
 #import "GDataXMLNode.h"
 #import "Reachability.h"
@@ -21,6 +22,8 @@
 @property (nonatomic, strong) NSMutableDictionary<NSString *, Device *> *deviceDic; // key: location string,  value: device
 
 @property (nonatomic, strong) Reachability                              *reachability;
+
+@property (nonatomic, assign) BOOL                                      isSocketClosed;
 
 #if OS_OBJECT_USE_OBJC
 @property (nonatomic, strong) dispatch_queue_t                          queue;
@@ -39,7 +42,7 @@
 @synthesize reachability = _reachability;
 
 
-+ (instancetype)server
++ (instancetype)shareServer
 {
     static DLNAUpnpServer *server;
     
@@ -60,11 +63,15 @@
     
     if (self) {
         
+        _isSocketClosed = YES;
+        
         _queue = dispatch_queue_create("moe.key.yao.dlna", DISPATCH_QUEUE_SERIAL);
         
         _udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
         
         _deviceDic = [[NSMutableDictionary alloc] init];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
         
     }
     
@@ -77,15 +84,46 @@
     dispatch_release(_queue);
 #endif
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)start
 {
-    [_udpSocket bindToPort:UDP_CLIENT_PROT error:nil];
+    [self startAndSearch:NO];
+}
+
+- (void)startAndSearch:(BOOL)isSearch
+{
+    _isSocketClosed = NO;
     
-    [_udpSocket beginReceiving:nil];
+    NSError *error = nil;
     
-    [_udpSocket joinMulticastGroup:UDP_SERVER_HOST error:nil];
+    if (![_udpSocket bindToPort:1900 error:&error])
+    {
+        if (IS_DEBUGING)
+        {
+            NSLog(@"===============>> Error bindToPort: %@", [error description]);
+        }
+        
+        [_udpSocket bindToPort:0 error:nil];
+    }
+    
+    if (![_udpSocket beginReceiving:&error])
+    {
+        if (IS_DEBUGING)
+        {
+            NSLog(@"===============>> Error beginReceiving: %@", [error description]);
+        }
+    }
+    
+    if (![_udpSocket joinMulticastGroup:UDP_SERVER_HOST error:&error])
+    {
+        if (IS_DEBUGING)
+        {
+            NSLog(@"===============>> Error joinMulticastGroup: %@", [error description]);
+        }
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNetworkStatusChange:) name:kReachabilityChangedNotification object:nil];
     
@@ -93,37 +131,44 @@
     
     [self.reachability startNotifier];
     
-    if ([self.reachability currentReachabilityStatus] == ReachableViaWiFi)
+    if (isSearch)
     {
-        // 当前网络是wifi下, 则主动搜索设备, 非wifi则不主动搜索
-        [self search];
+        if ([self.reachability currentReachabilityStatus] == ReachableViaWiFi)
+        {
+            // 当前网络是wifi下, 则主动搜索设备, 非wifi则不主动搜索
+            [self search];
+        }
     }
+    
 }
 
 - (void)search
 {
-    if (self.delegate)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            // 搜索前先清空设备列表, 防止局域网改变时旧的设备还残留
-            [self.deviceDic removeAllObjects];
-            
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        // 搜索前先清空设备列表, 防止局域网改变时旧的设备还残留
+        [self.deviceDic removeAllObjects];
+        
+        if (self.delegate)
+        {
             [self.delegate onChange];
-            
-        });
-    }
+
+        }
+        
+    });
     
     [_udpSocket sendData:[SEARCH_DATA dataUsingEncoding:NSUTF8StringEncoding] toHost:UDP_SERVER_HOST port:UDP_SERVER_PROT withTimeout:-1 tag:1];
 }
 
-- (NSArray *)getDeviceList
+- (NSArray<Device *> *)getDeviceList
 {
     NSMutableArray *array = [[NSMutableArray alloc] init];
+    
     if (self.deviceDic)
     {
         [array addObjectsFromArray:self.deviceDic.allValues];
     }
+    
     return array;
 }
 
@@ -348,6 +393,15 @@
     }
 }
 
+#pragma mark - notification
+- (void)didBecomeActiveNotification:(NSNotification *)notification
+{
+    if (_isSocketClosed)
+    {
+        [self startAndSearch:NO];
+    }
+}
+
 #pragma mark - GCDAsyncUdpSocketDelegate method
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data fromAddress:(NSData *)address withFilterContext:(id)filterContext
 {
@@ -427,6 +481,15 @@
         
     }
     
+}
+
+- (void)udpSocketDidClose:(GCDAsyncUdpSocket *)sock withError:(NSError *)error
+{
+    if (IS_DEBUGING)
+    {
+        NSLog(@"===============>> system close udp socket");
+    }
+    _isSocketClosed = YES;
 }
 
 

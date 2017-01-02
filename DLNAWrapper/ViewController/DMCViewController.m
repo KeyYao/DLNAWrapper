@@ -258,7 +258,7 @@
         make.width.equalTo(seekBackBtn);
     }];
     
-    device = [[[DLNAUpnpServer server] getDeviceList] objectAtIndex:deviceIndex];
+    device = [[[DLNAUpnpServer shareServer] getDeviceList] objectAtIndex:deviceIndex];
     
     mediaCP = [[ControlPoint alloc] initWithService:device.mediaControlService];
     renderingCP = [[ControlPoint alloc] initWithService:device.renderingControlService];

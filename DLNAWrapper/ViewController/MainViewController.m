@@ -46,9 +46,9 @@
     
     [self createView];
     
-    [DLNAUpnpServer server].delegate = self;
+    [DLNAUpnpServer shareServer].delegate = self;
     
-    [[DLNAUpnpServer server] start];
+    [[DLNAUpnpServer shareServer] startAndSearch:YES];
     
     [[FileServer server] start];
 }
@@ -247,7 +247,7 @@
     DeviceListViewController *deviceVC = [[DeviceListViewController alloc] init];
     deviceVC.selectedDevice = ^(int index) {
         self.deviceIndex = index;
-        NSString *name = [[[[DLNAUpnpServer server] getDeviceList] objectAtIndex:index] name];
+        NSString *name = [[[[DLNAUpnpServer shareServer] getDeviceList] objectAtIndex:index] name];
         NSLog(@"device name -- > %@", name);
         deviceName.text = name;
     };
@@ -301,7 +301,7 @@
 }
 
 - (void)onChange {
-    int count = (int)[[[DLNAUpnpServer server] getDeviceList] count];
+    int count = (int)[[[DLNAUpnpServer shareServer] getDeviceList] count];
     deviceCountLabel.text = [[NSString alloc] initWithFormat:@"已发现设备数量：%d", count];
 }
 
