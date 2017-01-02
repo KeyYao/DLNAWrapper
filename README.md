@@ -45,7 +45,7 @@
 #### 5.启动DLNAUpnpServer
 
 ```objective-c
-[[DLNAUpnpServer server] start];
+[[DLNAUpnpServer shareServer] start];
 ```
 
 #### 6.启动FileServer（可选）
