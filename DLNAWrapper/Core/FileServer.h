@@ -13,7 +13,7 @@
 
 @interface FileServer : NSObject
 
-+ (instancetype)server;
++ (instancetype)shareServer;
 
 - (void)start;
 

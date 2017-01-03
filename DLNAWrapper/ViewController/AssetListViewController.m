@@ -137,7 +137,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     PHAsset *asset = [assetArray objectAtIndex:indexPath.row];
-    NSString *url = [[FileServer server] getUrlFromAsset:asset];
+    NSString *url = [[FileServer shareServer] getUrlFromAsset:asset];
     address(url);
     [self back:nil];
 }

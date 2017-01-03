@@ -50,7 +50,7 @@
     
     [[DLNAUpnpServer shareServer] startAndSearch:YES];
     
-    [[FileServer server] start];
+    [[FileServer shareServer] start];
 }
 
 - (void)createView

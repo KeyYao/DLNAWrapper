@@ -51,7 +51,7 @@
 #### 6.启动FileServer（可选）
 
 ```objective-c
-[[FileServer server] start];
+[[FileServer shareServer] start];
 ```
 
 #### 对设备的控制操作请参考例子

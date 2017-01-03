@@ -19,7 +19,7 @@
 
 @property (nonatomic, strong) GCDAsyncUdpSocket                         *udpSocket;
 
-@property (nonatomic, strong) NSMutableDictionary<NSString *, Device *> *deviceDic; // key: location string,  value: device
+@property (nonatomic, strong) NSMutableDictionary<NSString *, Device *> *deviceDic; // key: usn(uuid) string,  value: device
 
 @property (nonatomic, strong) Reachability                              *reachability;
 
@@ -162,7 +162,7 @@
 
 - (NSArray<Device *> *)getDeviceList
 {
-    NSMutableArray *array = [[NSMutableArray alloc] init];
+    NSMutableArray<Device *> *array = [[NSMutableArray alloc] init];
     
     if (self.deviceDic)
     {
@@ -314,7 +314,7 @@
     return device;
 }
 
-- (void)addDevice:(Device *)device forLocation:(NSString *)location
+- (void)addDevice:(Device *)device forUSN:(NSString *)usn
 {
     if (!device)
     {
@@ -323,10 +323,10 @@
     
     if (IS_DEBUGING)
     {
-        NSLog(@"===============>> add device : %@", location);
+        NSLog(@"===============>> add device: \"%@\", uuid: \"%@\"", device.name, usn);
     }
     
-    [self.deviceDic setObject:device forKey:location];
+    [self.deviceDic setObject:device forKey:usn];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
@@ -338,14 +338,14 @@
     });
 }
 
-- (void)removeDeviceFromLocation:(NSString *)location
+- (void)removeDeviceFromUSN:(NSString *)usn
 {
     if (IS_DEBUGING)
     {
-        NSLog(@"===============>> remove device : %@", location);
+        NSLog(@"===============>> remove device uuid: \"%@\"", usn);
     }
     
-    [self.deviceDic removeObjectForKey:location];
+    [self.deviceDic removeObjectForKey:usn];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
@@ -357,7 +357,6 @@
     });
     
 }
-
 
 - (NSString *)headerValueForKey:(NSString *)key inData:(NSString *)data
 {
@@ -424,12 +423,14 @@
             
             NSString *location = [self headerValueForKey:@"Location:" inData:str];
             
+            NSString *usn = [self headerValueForKey:@"USN:" inData:str];
+            
             if (IS_DEBUGING)
             {
-                NSLog(@"===============>> notify data %@\nssdp %@, location %@", str, ssdp, location);
+                NSLog(@"===============>> notify data %@\nssdp %@, usn %@", str, ssdp, usn);
             }
             
-            if ([location isEqualToString:@""])
+            if ([usn isEqualToString:@""])
             {
                 return;
             }
@@ -439,9 +440,9 @@
             {
                 dispatch_async(_queue, ^{
                     
-                    if ([self.deviceDic objectForKey:location] == nil)
+                    if ([self.deviceDic objectForKey:usn] == nil)
                     {
-                        [self addDevice:[self parserDeviceLocation:location] forLocation:location];
+                        [self addDevice:[self parserDeviceLocation:location] forUSN:usn];
                     }
                     
                 });
@@ -450,7 +451,7 @@
             {
                 dispatch_async(_queue, ^{
                     
-                    [self removeDeviceFromLocation:location];
+                    [self removeDeviceFromUSN:usn];
                     
                 });
             }
@@ -462,22 +463,26 @@
         // from search response data
         NSString *location = [self headerValueForKey:@"Location:" inData:str];
         
+        NSString *usn = [self headerValueForKey:@"USN:" inData:str];
+        
         if (IS_DEBUGING)
         {
             NSLog(@"===============>> search response data %@", str);
         }
         
-        if (![location isEqualToString:@""])
+        if ([usn isEqualToString:@""])
         {
-            dispatch_async(_queue, ^{
-                
-                if ([self.deviceDic objectForKey:location] == nil)
-                {
-                    [self addDevice:[self parserDeviceLocation:location] forLocation:location];
-                }
-                
-            });
+            return;
         }
+        
+        dispatch_async(_queue, ^{
+            
+            if ([self.deviceDic objectForKey:usn] == nil)
+            {
+                [self addDevice:[self parserDeviceLocation:location] forUSN:usn];
+            }
+            
+        });
         
     }
     

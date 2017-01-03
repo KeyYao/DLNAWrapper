@@ -23,7 +23,7 @@
 
 @synthesize webServer = _webServer;
 
-+ (instancetype)server
++ (instancetype)shareServer
 {
     static FileServer *s;
     
@@ -145,7 +145,7 @@
         
     }];
     
-    [_webServer startWithPort:5438 bonjourName:nil];
+    [_webServer startWithPort:FILE_SERVER_PORT bonjourName:nil];
 }
 
 - (void)stop
