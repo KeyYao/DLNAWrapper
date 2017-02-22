@@ -10,6 +10,8 @@
 
 @implementation Device
 
+@synthesize uuid                    = _uuid;
+
 @synthesize name                    = _name;
 
 @synthesize location                = _location;
@@ -28,7 +30,7 @@
         
         Device *device = (Device *)other;
         
-        return [self.location isEqualToString:device.location];
+        return [self.uuid isEqualToString:device.uuid];
     }
     
     return NO;
@@ -36,12 +38,12 @@
 
 - (NSUInteger)hash
 {
-    return [self.location hash];
+    return [self.uuid hash];
 }
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"name: %@\nlocation: %@\nmediaControl: %@\nrenderingControl: %@", self.name, self.location, self.mediaControlService, self.renderingControlService];
+    return [NSString stringWithFormat:@"name: %@\nlocation: %@\nuuid: %@\nmediaControl: %@\nrenderingControl: %@", self.name, self.location, self.uuid, self.mediaControlService, self.renderingControlService];
 }
 
 @end

@@ -173,7 +173,7 @@
 }
 
 #pragma mark - private method
-- (Device *)parserDeviceLocation:(NSString *)location
+- (Device *)parserDeviceLocation:(NSString *)location withUSN:(NSString *)usn
 {
     dispatch_semaphore_t seamphore = dispatch_semaphore_create(0);
     
@@ -203,6 +203,8 @@
                 
                 device.location = location;
                 
+                device.uuid = usn;
+                
                 GDataXMLDocument *document = [[GDataXMLDocument alloc] initWithData:data options:0 error:nil];
                 
                 GDataXMLElement *deviceElement = [[[document rootElement] elementsForName:@"device"] objectAtIndex:0];
@@ -218,8 +220,10 @@
                 for (GDataXMLElement *serviceElement in serviceElementArray) {
                     
                     NSString *serviceId = [[[serviceElement elementsForName:@"serviceId"] objectAtIndex:0] stringValue];
+                    
+                    NSString *serviceType = [[[serviceElement elementsForName:@"serviceType"] objectAtIndex:0] stringValue];
         
-                    if ([serviceId containsString:MEDIA_CONTROL_SERVICE_ID]) {
+                    if ([serviceId containsString:MEDIA_CONTROL_SERVICE_ID] || [serviceType containsString:SERVICE_TYPE_AVTRANSPORT]) {
         
                         MediaControlService *service = [[MediaControlService alloc] init];
         
@@ -260,7 +264,7 @@
                         continue;
                     }
         
-                    if ([serviceId containsString:RENDERING_CONTROL_SERVICE_ID]) {
+                    if ([serviceId containsString:RENDERING_CONTROL_SERVICE_ID] || [serviceType containsString:SERVICE_TYPE_RENDERING_CONTROL]) {
         
                         RenderingControlService *service = [[RenderingControlService alloc] init];
         
@@ -442,7 +446,7 @@
                     
                     if ([self.deviceDic objectForKey:usn] == nil)
                     {
-                        [self addDevice:[self parserDeviceLocation:location] forUSN:usn];
+                        [self addDevice:[self parserDeviceLocation:location withUSN:usn] forUSN:usn];
                     }
                     
                 });
@@ -479,7 +483,7 @@
             
             if ([self.deviceDic objectForKey:usn] == nil)
             {
-                [self addDevice:[self parserDeviceLocation:location] forUSN:usn];
+                [self addDevice:[self parserDeviceLocation:location withUSN:usn] forUSN:usn];
             }
             
         });

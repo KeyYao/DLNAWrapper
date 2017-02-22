@@ -12,6 +12,8 @@
 
 @interface Device : NSObject
 
+@property (nonatomic, strong) NSString                *uuid;
+
 @property (nonatomic, strong) NSString                *name;
 
 @property (nonatomic, strong) NSString                *location;

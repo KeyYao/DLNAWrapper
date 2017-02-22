@@ -62,8 +62,8 @@
             } else {
 
                 if (IS_DEBUGING) {
-
-                    NSLog(@"===============>> excecute \"%@\" action error, response data -- > %@", [action name], [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                    
+                    NSLog(@"===============>> excecute \"%@\" action error : \"%@\", response data -- > %@", [action name], error.description, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
 
                 }
 
@@ -78,7 +78,7 @@
 
             if (IS_DEBUGING) {
 
-                NSLog(@"===============>> excecute \"%@\" action error, no response", [action name]);
+                NSLog(@"===============>> excecute \"%@\" action error, no response, error: \"%@\"", [action name], error.description);
                 
             }
             

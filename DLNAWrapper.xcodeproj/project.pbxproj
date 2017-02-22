@@ -56,6 +56,7 @@
 		EA5ACAB01D98B72A00E6B85C /* DeviceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA981D98B72A00E6B85C /* DeviceListViewController.m */; };
 		EA5ACAB11D98B72A00E6B85C /* DMCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA9A1D98B72A00E6B85C /* DMCViewController.m */; };
 		EA5ACAB21D98B72A00E6B85C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5ACA9C1D98B72A00E6B85C /* MainViewController.m */; };
+		EA6331E61E5D8C2D0088E56E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6331E51E5D8C2D0088E56E /* Reachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -158,6 +159,8 @@
 		EA5ACA9A1D98B72A00E6B85C /* DMCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMCViewController.m; sourceTree = "<group>"; };
 		EA5ACA9B1D98B72A00E6B85C /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		EA5ACA9C1D98B72A00E6B85C /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		EA6331E41E5D8C2D0088E56E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		EA6331E51E5D8C2D0088E56E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		F63A6BF622378B432ABE3D36 /* Pods-DLNAWrapper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DLNAWrapper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DLNAWrapper/Pods-DLNAWrapper.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -307,6 +310,7 @@
 				EA5ACA8B1D98B72A00E6B85C /* GCDAsyncUdpSocket */,
 				EA3F19401D98C2F400F06A6E /* GCDWebServer */,
 				EA5ACA8E1D98B72A00E6B85C /* GDataXML */,
+				EA6331E31E5D8C2D0088E56E /* Reachability */,
 				EA5ACA7F1D98B72A00E6B85C /* ControlService */,
 				EA5ACA681D98B72A00E6B85C /* Action */,
 				EA5ACA7C1D98B72A00E6B85C /* Config.h */,
@@ -408,6 +412,15 @@
 				EA3A6AFD1D9BA032009A6C87 /* AssetListViewController.m */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		EA6331E31E5D8C2D0088E56E /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				EA6331E41E5D8C2D0088E56E /* Reachability.h */,
+				EA6331E51E5D8C2D0088E56E /* Reachability.m */,
+			);
+			path = Reachability;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -560,6 +573,7 @@
 				EA5ACA9D1D98B72A00E6B85C /* ActionBase.m in Sources */,
 				EA5ACA9E1D98B72A00E6B85C /* GetPositionInfo.m in Sources */,
 				EA3A6B011D9BA055009A6C87 /* AssetTableViewCell.m in Sources */,
+				EA6331E61E5D8C2D0088E56E /* Reachability.m in Sources */,
 				EA5ACA661D98B72400E6B85C /* AppDelegate.m in Sources */,
 				EA3F19641D98C2F400F06A6E /* GCDWebServerResponse.m in Sources */,
 				EA5ACA4F1D98B6EA00E6B85C /* main.m in Sources */,
