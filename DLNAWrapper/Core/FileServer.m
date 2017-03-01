@@ -57,6 +57,7 @@
 {
     [_webServer removeAllHandlers];
     
+    // 监听来自相册图片的资源的请求
     [_webServer addHandlerForMethod:@"GET" path:@"/image" requestClass:[GCDWebServerRequest class] asyncProcessBlock:^(__kindof GCDWebServerRequest *request, GCDWebServerCompletionBlock completionBlock) {
         
         NSString *url = request.URL.absoluteString;
@@ -99,6 +100,7 @@
         
     }];
     
+    // 监听来自相册视频资源的请求
     [_webServer addHandlerForMethod:@"GET" path:@"/video" requestClass:[GCDWebServerRequest class] asyncProcessBlock:^(__kindof GCDWebServerRequest *request, GCDWebServerCompletionBlock completionBlock) {
         
         NSString *url = request.URL.absoluteString;
@@ -145,12 +147,69 @@
         
     }];
     
+    // 监听来自目录文件资源的请求
+    [_webServer addHandlerForMethod:@"GET" path:@"/file" requestClass:[GCDWebServerRequest class] asyncProcessBlock:^(__kindof GCDWebServerRequest *request, GCDWebServerCompletionBlock completionBlock) {
+        
+        NSString *url = [request.URL.absoluteString stringByRemovingPercentEncoding];
+        
+        NSRange range = [url rangeOfString:@"/file?"];
+        
+        NSString *parameterString = [url substringFromIndex:(range.location + range.length)];
+        
+        if (parameterString == nil || [parameterString isEqualToString:@""])
+        {
+            completionBlock([GCDWebServerResponse responseWithStatusCode:404]);
+            
+            return;
+        }
+        
+        NSRange pathRange = [parameterString rangeOfString:@"path="];
+        
+        NSString *pathString = [parameterString substringFromIndex:(pathRange.location + pathRange.length)];
+        
+        if (pathString == nil || [pathString isEqualToString:@""])
+        {
+            completionBlock([GCDWebServerResponse responseWithStatusCode:404]);
+            
+            return;
+        }
+        
+        NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        
+        NSString *fullPath = [NSString stringWithFormat:@"%@%@", documentPath, pathString];
+        
+        if (![[NSFileManager defaultManager] fileExistsAtPath:fullPath])
+        {
+            completionBlock([GCDWebServerResponse responseWithStatusCode:404]);
+            
+            return;
+        }
+        
+        GCDWebServerResponse *response = [GCDWebServerFileResponse responseWithFile:fullPath byteRange:request.byteRange];
+        
+        completionBlock(response);
+        
+    }];
+    
     [_webServer startWithPort:FILE_SERVER_PORT bonjourName:nil];
+    
 }
 
 - (void)stop
 {
-    [_webServer stop];
+    if (_webServer)
+    {
+        [_webServer stop];
+    }
+}
+
+- (BOOL)isRunning
+{
+    if (!_webServer)
+    {
+        return NO;
+    }
+    return [_webServer isRunning];
 }
 
 - (NSString *)getUrlFromAsset:(PHAsset *)asset
@@ -165,6 +224,17 @@
     }
     
     return [_webServer serverURL].absoluteString;
+}
+
+- (NSString *)getUrlFromDocumentPath:(NSString *)path
+{
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    NSString *shortPath = [path stringByReplacingOccurrencesOfString:documentPath withString:@""];
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@path=%@", _webServer.serverURL, @"file?", shortPath];
+    
+    return [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
 }
 
 @end
