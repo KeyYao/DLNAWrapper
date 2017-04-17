@@ -14,4 +14,6 @@
 
 - (instancetype)initWithURI:(NSString *)uri success:(void(^)())successBlock failure:(void(^)(NSError *error))failureBlock;
 
+- (instancetype)initWithURI:(NSString *)uri metaData:(NSString *)metaData success:(void(^)())successBlock failure:(void(^)(NSError *error))failureBlock;
+
 @end

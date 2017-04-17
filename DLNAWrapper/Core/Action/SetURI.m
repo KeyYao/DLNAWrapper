@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) NSString *uri;
 
+@property (nonatomic, strong) NSString *metaData;
+
 @property (nonatomic, copy)   void(^successCallback)();
 
 @property (nonatomic, copy)   void(^failureCallback)(NSError *error);
@@ -22,15 +24,26 @@
 
 @synthesize uri             = _uri;
 
+@synthesize metaData        = _metaData;
+
 @synthesize successCallback = _successCallback;
 
 @synthesize failureCallback = _failureCallback;
 
 - (instancetype)initWithURI:(NSString *)uri success:(void(^)())successBlock failure:(void(^)(NSError *))failureBlock
 {
+    self = [self initWithURI:uri metaData:nil success:successBlock failure:failureBlock];
+    
+    return self;
+}
+
+- (instancetype)initWithURI:(NSString *)uri metaData:(NSString *)metaData success:(void (^)())successBlock failure:(void (^)(NSError *))failureBlock
+{
     self = [self init];
     
     self.uri = uri;
+    
+    self.metaData = metaData;
     
     self.successCallback = successBlock;
     
@@ -59,7 +72,16 @@
     
     GDataXMLElement *currentURIElement = [GDataXMLElement elementWithName:@"CurrentURI" stringValue:self.uri];
     
-    GDataXMLElement *currentURIMetaDataElement = [GDataXMLElement elementWithName:@"CurrentURIMetaData"];
+    GDataXMLElement *currentURIMetaDataElement;
+    
+    if (self.metaData)
+    {
+        currentURIMetaDataElement = [GDataXMLElement elementWithName:@"CurrentURIMetaData" stringValue:self.metaData];
+    }
+    else
+    {
+        currentURIMetaDataElement = [GDataXMLElement elementWithName:@"CurrentURIMetaData"];
+    }
     
     [setURIElement addChild:instanceIDElement];
     
