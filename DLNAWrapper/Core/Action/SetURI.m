@@ -8,6 +8,10 @@
 
 #import "SetURI.h"
 
+#define AudioDIDL @"<DIDL-Lite xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:sec=\"http://www.sec.co.kr/\" xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\"><item id=\"f-0\" parentID=\"0\" restricted=\"0\"><dc:title>Audio</dc:title><dc:creator>Anonymous</dc:creator><upnp:class>object.item.audioItem</upnp:class><res protocolInfo=\"http-get:*:audio/*:DLNA.ORG_OP=01;DLNA.ORG_CI=0;DLNA.ORG_FLAGS=01700000000000000000000000000000\" sec:URIType=\"public\">%@</res></item></DIDL-Lite>"
+
+#define VideoDIDL @"<DIDL-Lite xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:sec=\"http://www.sec.co.kr/\" xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\"><item id=\"f-0\" parentID=\"0\" restricted=\"0\"><dc:title>Video</dc:title><dc:creator>Anonymous</dc:creator><upnp:class>object.item.videoItem</upnp:class><res protocolInfo=\"http-get:*:video/*:DLNA.ORG_OP=01;DLNA.ORG_CI=0;DLNA.ORG_FLAGS=01700000000000000000000000000000\" sec:URIType=\"public\">%@</res></item></DIDL-Lite>"
+
 @interface SetURI ()
 
 @property (nonatomic, strong) NSString *uri;
@@ -33,6 +37,24 @@
 - (instancetype)initWithURI:(NSString *)uri success:(void(^)())successBlock failure:(void(^)(NSError *))failureBlock
 {
     self = [self initWithURI:uri metaData:nil success:successBlock failure:failureBlock];
+    
+    return self;
+}
+
+- (instancetype)initWithURI:(NSString *)uri useDefaultAudioMeta:(BOOL)flag success:(void (^)())successBlock failure:(void (^)(NSError *))failureBlock
+{
+    NSString *metaData = flag ? [NSString stringWithFormat:AudioDIDL, uri] : nil;
+    
+    self = [self initWithURI:uri metaData:metaData success:successBlock failure:failureBlock];
+    
+    return self;
+}
+
+- (instancetype)initWithURI:(NSString *)uri useDefaultVideoMeta:(BOOL)flag success:(void (^)())successBlock failure:(void (^)(NSError *))failureBlock
+{
+    NSString *metaData = flag ? [NSString stringWithFormat:VideoDIDL, uri] : nil;
+    
+    self = [self initWithURI:uri metaData:metaData success:successBlock failure:failureBlock];
     
     return self;
 }

@@ -39,6 +39,11 @@
     
     request.HTTPBody = [action postData];
     
+//    if (IS_DEBUGING)
+//    {
+//        NSLog(@"===============>> excecute \"%@\" action, request data -- > %@", [action name], [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
+//    }
+    
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
         if (response != nil) {
@@ -47,10 +52,9 @@
 
             if ([httpResponse statusCode] == 200) {
 
-                if (IS_DEBUGING) {
-
+                if (IS_DEBUGING)
+                {
                     NSLog(@"===============>> excecute \"%@\" action success, response data -- > %@", [action name], [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-
                 }
 
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -61,10 +65,9 @@
 
             } else {
 
-                if (IS_DEBUGING) {
-                    
+                if (IS_DEBUGING)
+                {
                     NSLog(@"===============>> excecute \"%@\" action error : \"%@\", response data -- > %@", [action name], error.description, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-
                 }
 
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -76,10 +79,9 @@
             }
         } else {
 
-            if (IS_DEBUGING) {
-
+            if (IS_DEBUGING)
+            {
                 NSLog(@"===============>> excecute \"%@\" action error, no response, error: \"%@\"", [action name], error.description);
-                
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{

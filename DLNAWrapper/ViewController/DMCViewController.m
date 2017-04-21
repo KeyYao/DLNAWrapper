@@ -284,6 +284,15 @@
         NSLog(@"设置 URL 失败");
     }];
     
+//    SetURI *setUriAction = [[SetURI alloc] initWithURI:url useDefaultVideoMeta:true success:^{
+//        isUpdateProgress = YES;
+//        [self getPositionInfo];
+//        [self getVolume];
+//        [self play:nil];
+//    } failure:^(NSError *error) {
+//        NSLog(@"设置 URL 失败");
+//    }];
+    
     [mediaCP executeAction:setUriAction];
 }
 
